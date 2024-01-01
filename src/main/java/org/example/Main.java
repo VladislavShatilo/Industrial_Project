@@ -11,13 +11,16 @@ public class Main {
         fillFileInfo.nameInputFile();
 
         fillFileInfo.encryptArchiveInputType();
+        fillFileInfo.typeOutputFileChoice();
+        fillFileInfo.nameOutputFile();
+        fillFileInfo.encryptArchiveOutputType();
 
-        //fillFileInfo.typeOutputFileChoice();fillFileInfo.nameOutputFile();
+
 
         //fillFileInfo.isEncryptOutputFile();
         // fillFileInfo.isArchiveOutputFile();
         manage.callFunctionInput();
-        //manage.callFunctionOutput();
+        manage.callFunctionOutput();
     }
 
 

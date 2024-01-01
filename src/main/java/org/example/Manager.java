@@ -20,9 +20,13 @@ public class Manager {
 
         if(!file.isArchiveInputFile && file.isEncryptInputFile)
         {
+
+
             switch (file.typeInputFile)
             {
                 case "txt"->{
+
+
 
                 }
                 case "json"->{
@@ -149,28 +153,27 @@ public class Manager {
 
     public void callFunctionOutput() {
 
-        file.nameOutputFile += "." + file.typeOutputFile;
+
         if(file.isEncryptOutputFile && !file.isArchiveOutputFile)
         {
-            switch (file.typeOutputFile) {
-                case "txt" -> {
-
-                }
-                case "json" -> {
-
-                }
-                case "xml" -> {
-
-                }
-                default -> {
-
-                }
+            file.nameOutputFile += ".enc";
+            Encryption encryption = new Encryption();
+            File inputFile = new File(file.nameInputFile);
+            File outputFile = new File(file.nameOutputFile);
+            try {
+                encryption.encryptFile(inputFile, outputFile);
             }
+            catch (Exception e)
+            {
+                System.out.println("Error encrypt file " + e.toString());
+            }
+
 
         }
 
         else if(!file.isEncryptOutputFile && file.isArchiveOutputFile)
         {
+            file.nameOutputFile += "." + file.typeOutputFile;
             switch (file.typeOutputFile) {
                 case "txt" -> {
 
@@ -188,6 +191,7 @@ public class Manager {
         }
         else if(file.isEncryptOutputFile  && file.ArchiveThanEncryptOutput)
         {
+            file.nameOutputFile += "." + file.typeOutputFile;
             switch (file.typeOutputFile) {
                 case "txt" -> {
 
@@ -205,6 +209,7 @@ public class Manager {
         }
         else if(file.isEncryptOutputFile && file.encryptThanArchiveOutput)
         {
+            file.nameOutputFile += "." + file.typeOutputFile;
             switch (file.typeOutputFile) {
                 case "txt" -> {
 
@@ -221,6 +226,7 @@ public class Manager {
             }
         }
         else {
+            file.nameOutputFile += "." + file.typeOutputFile;
             switch (file.typeOutputFile) {
                 case "txt" -> {
 

@@ -44,6 +44,7 @@ import java.util.zip.ZipInputStream;
                  System.out.println(e.getMessage());;
             }
         }
+        
         public void readZipJson(String fileName)
         {
             try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(fileName))) {
