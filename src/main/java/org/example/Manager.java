@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.File;
 import java.util.Vector;
 
 public class Manager {
@@ -33,7 +34,6 @@ public class Manager {
 
 
                     }
-
 
 
                 } catch (Exception e) {
@@ -77,46 +77,51 @@ public class Manager {
 
 
 
+
         }
     }
 
 
-    public void callFunctionOutput()
-    {
+    public void callFunctionOutput() {
 
         file.nameOutputFile += "." + file.typeOutputFile;
-        switch (file.typeOutputFile)
-        {
-            case "txt":{
+        switch (file.typeOutputFile) {
+            case "txt" -> {
                 PlainTextProcess txtWork = new PlainTextProcess();
                 try {
                     txtWork.writeInPlainText(result, file.nameOutputFile);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                break;
 
             }
-            case "json":{
+            case "json" -> {
                 JSONWork jsonWork = new JSONWork();
                 try {
                     jsonWork.writeInJSON(result, file.nameOutputFile);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                break;
 
             }
-
-            case "xml":{
+            case "xml" -> {
                 XMLWork xmlWork = new XMLWork();
                 try {
                     xmlWork.writeInXml(result, file.nameOutputFile);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                break;
 
+            }
+            case "enc" -> {
+                Encryption encryption = new Encryption();
+                File inputFile = new File(file.nameInputFile);
+                File outputFile = new File(file.nameOutputFile);
+                try {
+                    encryption.encryptFile(inputFile, outputFile);
+                } catch (Exception exception) {
+                    System.out.println("Error encrypt file");
+                }
             }
         }
     }
