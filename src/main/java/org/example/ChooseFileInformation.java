@@ -62,7 +62,7 @@ public class ChooseFileInformation
 
 
     }
-    public void encryptArchiveType()
+    public void encryptArchiveInputType()
     {
         int chose;
         System.out.println("What type of input file do you want to work with?\n" +
@@ -82,98 +82,95 @@ public class ChooseFileInformation
             }
         }while(!correctData);
 
-        switch (chose){
-            case 1:
-            {
-
-                break;
+        switch (chose) {
+            case 1 -> {
+                file.isArchiveInputFile = false;
+                file.isEncryptInputFile = false;
             }
-            case 2:
-            {
-                break;
+            case 2 -> {
+                file.isArchiveInputFile = false;
+                file.isEncryptInputFile = true;
             }
-            case 3:
-            {
-                break;
+            case 3 -> {
+                file.isArchiveInputFile = true;
+                file.isEncryptInputFile = false;
             }
-            case 4:
-            {
-                break;
+            case 4 -> {
+                file.isArchiveInputFile = true;
+                file.isEncryptInputFile = true;
+                file.encryptThanArchiveInput =true;
             }
-            case 5:
-            {
-                break;
+            case 5 ->{
+                file.isArchiveInputFile = true;
+                file.isEncryptInputFile = true;
+                file.ArchiveThanEncryptInput =true;
             }
-            default:
-            {
-                break;
+            default -> {
             }
-
-
         }
 
 
     }
 
-
-
     public void nameInputFile()
     {
         System.out.println("Input name of input file");
-
         file.nameInputFile = scan.next();
     }
 
-    public  void isEncryptInputFile()
-    {
-        String isEncrypt;
-        System.out.println("""
-                    Input file is encrypt?
-                    YES
-                    NO""");
-        do {
-            isEncrypt = scan.next();
-            if (isEncrypt.equals("YES")) {
 
-                file.isEncryptInputFile =true;
-                correctData = true;
-            }
-            else if(isEncrypt.equals("NO"))
-            {
-                file.isEncryptInputFile =false;
+
+    public void encryptArchiveOutputType()
+    {
+        int chose;
+        System.out.println("What type of output file do you want to work with?\n" +
+                "1. Just file\n" +
+                "2. Encrypt file\n" +
+                "3. Archive file\n" +
+                "4. Encrypt -> Archive file\n" +
+                "5. Archive -> Encrypt file");
+        do {
+            chose= scan.nextInt();
+            if (chose == 1 || chose == 2 || chose == 3 || chose == 4 || chose ==5) {
                 correctData = true;
             }
             else {
-                System.out.println("Incorrect data, please input again!\n");
+                System.out.println("Incorrect data, please input again!");
                 correctData = false;
             }
-        } while(!correctData);
+        }while(!correctData);
+
+        switch (chose) {
+            case 1 -> {
+                file.isArchiveOutputFile = false;
+                file.isEncryptOutputFile = false;
+            }
+            case 2 -> {
+                file.isArchiveOutputFile = false;
+                file.isEncryptOutputFile = true;
+            }
+            case 3 -> {
+                file.isArchiveOutputFile = true;
+                file.isEncryptOutputFile = false;
+            }
+            case 4-> {
+                file.isArchiveOutputFile = true;
+                file.isEncryptOutputFile= true;
+                file.encryptThanArchiveOutput= true;
+
+            }
+            case 5->{
+                file.isArchiveOutputFile = true;
+                file.isEncryptOutputFile= true;
+                file.ArchiveThanEncryptOutput =true;
+            }
+            default -> {
+            }
+        }
+
+
     }
 
-    public void isArchiveInputFile()
-    {
-        String isArchive;
-        System.out.println("""
-                    Input file is archive?
-                    YES
-                    NO""");
-        do {
-            isArchive = scan.next();
-            if (isArchive.equals("YES")) {
-                file.isArchiveInputFile =true;
-                correctData = true;
-            }
-            else if(isArchive.equals("NO"))
-            {
-                file.isArchiveInputFile = false;
-                correctData = true;
-            }
-            else {
-                System.out.println("Incorrect data, please input again!\n");
-                correctData = false;
-            }
-        } while(!correctData);
-    }
 
 
     public void typeOutputFileChoice()
@@ -206,55 +203,6 @@ public class ChooseFileInformation
 
     }
 
-    public  void isEncryptOutputFile()
-    {
-        String isEncrypt;
-        System.out.println("""
-                    Output file is encrypt?
-                    YES
-                    NO""");
-        do {
-            isEncrypt = scan.next();
-            if (isEncrypt.equals("YES") ) {
-                file.isEncryptOutputFile = true;
-                correctData = true;
-            }
-            else if(isEncrypt.equals("NO"))
-            {
-                file.isEncryptOutputFile =false;
-                correctData = true;
-            }
-            else {
-                System.out.println("Incorrect data, please input again!\n");
-                correctData = false;
-            }
-        } while(!correctData);
-    }
-    public void isArchiveOutputFile()
-    {
-        String isArchive;
-        System.out.println("""
-                    Output file is archive?
-                    YES
-                    NO""");
-        do {
-            isArchive = scan.next();
-            if (isArchive.equals("YES")) {
-                file.isArchiveOutputFile= true;
-
-                correctData = true;
-            }
-            else if(isArchive.equals("NO"))
-            {
-                file.isArchiveOutputFile = false;
-                correctData = true;
-            }
-            else {
-                System.out.println("Incorrect data, please input again!\n");
-                correctData = false;
-            }
-        } while(!correctData);
-    }
 
 
 

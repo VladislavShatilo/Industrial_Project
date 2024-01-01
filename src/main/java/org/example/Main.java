@@ -10,7 +10,7 @@ public class Main {
         fillFileInfo.typeInputFileChoice();
         fillFileInfo.nameInputFile();
 
-        fillFileInfo.isEncryptInputFile();
+        fillFileInfo.encryptArchiveInputType();
 
         //fillFileInfo.typeOutputFileChoice();fillFileInfo.nameOutputFile();
 
