@@ -25,7 +25,7 @@ public class Manager {
             case "txt": {
                 PlainTextProcess txtWork = new PlainTextProcess();
                 try {
-                    if(file.isEncryptInputFile.equals("NO") ){
+                    if(!file.isEncryptInputFile){
                         Vector<String> data = txtWork.readFromPlainTextFile(file.nameInputFile);
                         result = calculator.calculateSimple(data);}
                     else {
@@ -87,6 +87,8 @@ public class Manager {
         file.nameOutputFile += "." + file.typeOutputFile;
         switch (file.typeOutputFile) {
             case "txt" -> {
+
+
                 PlainTextProcess txtWork = new PlainTextProcess();
                 try {
                     txtWork.writeInPlainText(result, file.nameOutputFile);

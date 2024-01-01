@@ -3,14 +3,14 @@ package org.example;
     {
        public String typeInputFile;
        public String nameInputFile;
-       public String isEncryptInputFile;
-       public String isArchiveInputFile;
+       public boolean isEncryptInputFile;
+       public boolean isArchiveInputFile;
 
 
         public String typeOutputFile;
         public String nameOutputFile;
-        public String isEncryptOutputFile;
-        public String isArchiveOutputFile;
+        public boolean isEncryptOutputFile;
+        public boolean isArchiveOutputFile;
 
     }
 
