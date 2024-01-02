@@ -111,7 +111,6 @@ public class Manager {
                             Vector<String> data = txtWork.readFromPlainTextFile(file.nameInputFile);
                             result = calculator.calculateSimple(data);
 
-
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -119,10 +118,8 @@ public class Manager {
                 case "json" -> {
                     JSONWork jsonWork = new JSONWork();
                     try {
-
                         Vector<String> data = jsonWork.readFromJSON(file.nameInputFile);
                         result = calculator.calculateSimple(data);
-
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -149,144 +146,113 @@ public class Manager {
 
     }
 
+    private void archiveTxt(){
+        PlainTextProcess plainTextProcess = new PlainTextProcess();
+        plainTextProcess.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
+        ZipWork zipWork = new ZipWork();
+        zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+        File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
+        boolean delete = fileToDelete.delete();
+
+    }
+    private void archiveJson(){
+        JSONWork jsonWork = new JSONWork();
+        jsonWork.writeInJSON(result,  file.nameOutputFile + "." + file.typeOutputFile);
+        ZipWork zipWork = new ZipWork();
+        zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+        File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
+        boolean delete = fileToDelete.delete();
+
+
+    }
+    private void archiveXml(){
+        XMLWork xmlWork = new XMLWork();
+        xmlWork.writeInXml(result,file.nameOutputFile + "." + file.typeOutputFile);
+        ZipWork zipWork = new ZipWork();
+        zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+
+        File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
+        boolean delete = fileToDelete.delete();
+
+
+    }
+    private void enc(){
+        file.nameOutputFile += ".enc";
+        Encryption encryption = new Encryption();
+        File inputFile = new File(file.nameInputFile);
+        File outputFile = new File(file.nameOutputFile);
+        try {
+            encryption.encryptFile(inputFile, outputFile);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error encrypt file " + e.toString());
+        }
+    }
 
     public void callFunctionOutput() {
 
 
         if(file.isEncryptOutputFile && !file.isArchiveOutputFile)
         {
-            file.nameOutputFile += ".enc";
-            Encryption encryption = new Encryption();
-            File inputFile = new File(file.nameInputFile);
-            File outputFile = new File(file.nameOutputFile);
-            try {
-                encryption.encryptFile(inputFile, outputFile);
-            }
-            catch (Exception e)
-            {
-                System.out.println("Error encrypt file " + e.toString());
-            }
-
-
+            enc();
         }
 
         else if(!file.isEncryptOutputFile && file.isArchiveOutputFile)
         {
 
             switch (file.typeOutputFile) {
-                case "txt" -> {
-                    PlainTextProcess plainTextProcess = new PlainTextProcess();
-                    try {
-                        plainTextProcess.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println("error write in txt");
-                    }
-                    ZipWork zipWork = new ZipWork();
-                    zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
-                    File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-                    boolean delete = fileToDelete.delete();
-
-                }
-                case "json" -> {
-                    JSONWork jsonWork = new JSONWork();
-                    jsonWork.writeInJSON(result,  file.nameOutputFile + "." + file.typeOutputFile);
-                    ZipWork zipWork = new ZipWork();
-                    zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
-
-                    File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-                    boolean delete = fileToDelete.delete();
-
-                }
-                case "xml" -> {
-                    XMLWork xmlWork = new XMLWork();
-                    xmlWork.writeInXml(result,file.nameOutputFile + "." + file.typeOutputFile);
-                    ZipWork zipWork = new ZipWork();
-                    zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
-
-                    File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-                    boolean delete = fileToDelete.delete();
-
-
-                }
-                default -> {
-
-                }
+                case "txt" -> archiveTxt();
+                case "json" -> archiveJson();
+                case "xml" -> archiveXml();
+                default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
             }
 
         }
         else if(file.isEncryptOutputFile  && file.ArchiveThanEncryptOutput)
         {
-            file.nameOutputFile += "." + file.typeOutputFile;
+
             switch (file.typeOutputFile) {
                 case "txt" -> {
-
+                    archiveTxt();
+                    enc();
                 }
                 case "json" -> {
-
+                    archiveJson();
+                    enc();
                 }
                 case "xml" -> {
-
+                    archiveXml();
+                    enc();
                 }
-                default -> {
-
-                }
+                default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
             }
         }
         else if(file.isEncryptOutputFile && file.encryptThanArchiveOutput)
         {
-            file.nameOutputFile += "." + file.typeOutputFile;
-            switch (file.typeOutputFile) {
-                case "txt" -> {
+            enc();
+            ZipWork zipWork = new ZipWork();
+            zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+            File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
+            boolean delete = fileToDelete.delete();
 
-                }
-                case "json" -> {
-
-                }
-                case "xml" -> {
-
-                }
-                default -> {
-
-                }
-            }
         }
         else {
             file.nameOutputFile += "." + file.typeOutputFile;
             switch (file.typeOutputFile) {
                 case "txt" -> {
-
-
                     PlainTextProcess txtWork = new PlainTextProcess();
-                    try {
-                        txtWork.writeInPlainText(result, file.nameOutputFile);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-
+                    txtWork.writeInPlainText(result, file.nameOutputFile);
                 }
                 case "json" -> {
                     JSONWork jsonWork = new JSONWork();
-                    try {
-                        jsonWork.writeInJSON(result, file.nameOutputFile);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-
+                    jsonWork.writeInJSON(result, file.nameOutputFile);
                 }
                 case "xml" -> {
                     XMLWork xmlWork = new XMLWork();
-                    try {
-                        xmlWork.writeInXml(result, file.nameOutputFile);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-
+                    xmlWork.writeInXml(result, file.nameOutputFile);
                 }
-
             }
-
         }
     }
 
