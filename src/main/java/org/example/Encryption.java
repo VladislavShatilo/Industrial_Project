@@ -21,13 +21,13 @@ public class Encryption {
     public  void encryptFile(File inputFile, File outputFile)
             throws CryptoException {
         doCrypto(Cipher.ENCRYPT_MODE, key, inputFile, outputFile);
-        System.out.println("Encryption completed: " + outputFile.getName());
+
     }
 
-    public  void decryptFile(String key, File inputFile, File outputFile)
+    public  void decryptFile( File inputFile, File outputFile)
             throws CryptoException {
         doCrypto(Cipher.DECRYPT_MODE, key, inputFile, outputFile);
-        System.out.println("Decryption completed: " + outputFile.getName());
+
     }
 
     private static void doCrypto(int cipherMode, String key, File inputFile, File outputFile)

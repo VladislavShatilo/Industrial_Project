@@ -23,7 +23,6 @@ public  class JSONWork {
                 {
                     JSONObject expJson =(JSONObject)item;
                     String exp =(String) expJson.get("exp");
-                    System.out.println(exp);
                     data.add(exp);
                 }
 

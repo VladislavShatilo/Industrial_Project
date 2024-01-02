@@ -24,14 +24,56 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt"->{
+                    Encryption encryption = new Encryption();
+                    File inputFile = new File("enc_inp_txt.enc");
+                    File outputFile = new File("enc_out.txt");
+                    PlainTextProcess txtWork = new PlainTextProcess();
+                    try {
+                        encryption.decryptFile(inputFile,outputFile);
+                        Vector<String> data = txtWork.readFromPlainTextFile("enc_out.txt");
+                        result = calculator.calculateSimple(data);
+                        boolean delete = outputFile.delete();
 
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error decrypt file " + e.toString());
+                    }
 
 
                 }
                 case "json"->{
+                    Encryption encryption = new Encryption();
+                    File inputFile = new File("enc_inp_json.enc");
+                    File outputFile = new File("enc_out.json");
+                    JSONWork jsonWork = new JSONWork();
+                    try {
+                        encryption.decryptFile(inputFile,outputFile);
+                        Vector<String> data = jsonWork.readFromJSON("enc_out.json");
+                        result = calculator.calculateSimple(data);
+                        boolean delete = outputFile.delete();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error decrypt file " + e.toString());
+                    }
 
                 }
                 case "xml"->{
+                    Encryption encryption = new Encryption();
+                    File inputFile = new File("enc_inp_xml.enc");
+                    File outputFile = new File("enc_out.xml");
+                    XMLWork xmlWork = new XMLWork();
+                    try {
+                        encryption.decryptFile(inputFile,outputFile);
+                        Vector<String> data = xmlWork.readFromXML("enc_out.xml");
+                        result = calculator.calculateSimple(data);
+                        boolean delete = outputFile.delete();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error decrypt file " + e.toString());
+                    }
 
                 }
                 default -> {
