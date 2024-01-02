@@ -7,11 +7,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.*;
+import java.util.List;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
-    public class ZipWork {
+public class ZipWork {
         public void readZipTXT(String fileName)
         {
 
@@ -44,7 +46,29 @@ import java.util.zip.ZipInputStream;
                  System.out.println(e.getMessage());;
             }
         }
-        
+    public void write(Vector<String> result, String fileName, String type) {
+
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(fileName + ".zip"));
+             FileInputStream fis= new FileInputStream(fileName + "." + type);){
+            ZipEntry entry1=new ZipEntry(fileName + "." + type);
+            zipOutputStream.putNextEntry(entry1);
+            // считываем содержимое файла в массив byte
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            // добавляем содержимое к архиву
+            zipOutputStream.write(buffer);
+            // закрываем текущую запись для новой записи
+            zipOutputStream.closeEntry();
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("error");
+        }
+
+
+    }
         public void readZipJson(String fileName)
         {
             try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(fileName))) {

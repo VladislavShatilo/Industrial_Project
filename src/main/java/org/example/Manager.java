@@ -21,7 +21,6 @@ public class Manager {
         if(!file.isArchiveInputFile && file.isEncryptInputFile)
         {
 
-
             switch (file.typeInputFile)
             {
                 case "txt"->{
@@ -173,21 +172,49 @@ public class Manager {
 
         else if(!file.isEncryptOutputFile && file.isArchiveOutputFile)
         {
-            file.nameOutputFile += "." + file.typeOutputFile;
+
             switch (file.typeOutputFile) {
                 case "txt" -> {
+                    PlainTextProcess plainTextProcess = new PlainTextProcess();
+                    try {
+                        plainTextProcess.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("error write in txt");
+                    }
+                    ZipWork zipWork = new ZipWork();
+                    zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+                    File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
+                    boolean delete = fileToDelete.delete();
 
                 }
                 case "json" -> {
+                    JSONWork jsonWork = new JSONWork();
+                    jsonWork.writeInJSON(result,  file.nameOutputFile + "." + file.typeOutputFile);
+                    ZipWork zipWork = new ZipWork();
+                    zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+
+                    File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
+                    boolean delete = fileToDelete.delete();
 
                 }
                 case "xml" -> {
+                    XMLWork xmlWork = new XMLWork();
+                    xmlWork.writeInXml(result,file.nameOutputFile + "." + file.typeOutputFile);
+                    ZipWork zipWork = new ZipWork();
+                    zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+
+                    File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
+                    boolean delete = fileToDelete.delete();
+
 
                 }
                 default -> {
 
                 }
             }
+
         }
         else if(file.isEncryptOutputFile  && file.ArchiveThanEncryptOutput)
         {
