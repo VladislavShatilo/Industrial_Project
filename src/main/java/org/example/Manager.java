@@ -25,7 +25,7 @@ public class Manager {
             {
                 case "txt"->{
                     Encryption encryption = new Encryption();
-                    File inputFile = new File("enc_txt.enc");
+                    File inputFile = new File(file.nameInputFile + ".enc");
                     File outputFile = new File("enc_out.txt");
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
@@ -44,7 +44,7 @@ public class Manager {
                 }
                 case "json"->{
                     Encryption encryption = new Encryption();
-                    File inputFile = new File("enc_json.enc");
+                    File inputFile = new File(file.nameInputFile + ".enc");
                     File outputFile = new File("enc_out.json");
                     JSONWork jsonWork = new JSONWork();
                     try {
@@ -61,7 +61,7 @@ public class Manager {
                 }
                 case "xml"->{
                     Encryption encryption = new Encryption();
-                    File inputFile = new File("enc_xml.enc");
+                    File inputFile = new File(file.nameInputFile + ".enc");
                     File outputFile = new File("enc_out.xml");
                     XMLWork xmlWork = new XMLWork();
                     try {
@@ -144,12 +144,66 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt"->{
+                    Encryption encryption = new Encryption();
+                    File inputFile = new File(file.nameInputFile + ".enc");
+                    File outputFile = new File("enc_out.zip");
+                    ZipWork zipWork = new ZipWork();
+                    PlainTextProcess plainTextProcess = new PlainTextProcess();
+                    try {
+                        encryption.decryptFile(inputFile,outputFile);
+
+                        Vector<String> data = plainTextProcess.readFromPlainTextFile(zipWork.read("enc_out.zip"));
+                        result = calculator.calculateSimple(data);
+
+                        File fileToDelete = new File( zipWork.read("enc_out.zip"));
+                        fileToDelete.delete();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error decrypt file " + e.toString());
+                    }
+
 
                 }
                 case "json"->{
+                    Encryption encryption = new Encryption();
+                    File inputFile = new File(file.nameInputFile + ".enc");
+                    File outputFile = new File("enc_out.zip");
+                    ZipWork zipWork = new ZipWork();
+                    JSONWork jsonWork = new JSONWork();
+                    try {
+                        encryption.decryptFile(inputFile,outputFile);
+
+                        Vector<String> data = jsonWork.readFromJSON(zipWork.read("enc_out.zip"));
+                        result = calculator.calculateSimple(data);
+                        File fileToDelete = new File( zipWork.read("enc_out.zip"));
+                        fileToDelete.delete();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error decrypt file " + e.toString());
+                    }
+
 
                 }
                 case "xml"->{
+                    Encryption encryption = new Encryption();
+                    File inputFile = new File(file.nameInputFile + ".enc");
+                    File outputFile = new File("enc_out.zip");
+                    ZipWork zipWork = new ZipWork();
+                    XMLWork xmlWork = new XMLWork();
+                    try {
+                        encryption.decryptFile(inputFile,outputFile);
+
+                        Vector<String> data = xmlWork.readFromXML(zipWork.read("enc_out.zip"));
+                        result = calculator.calculateSimple(data);
+                        File fileToDelete = new File( zipWork.read("enc_out.zip"));
+                        fileToDelete.delete();
+                    }
+                    catch (Exception e)
+                    {
+                        System.out.println("Error decrypt file " + e.toString());
+                    }
 
                 }
                 default -> {

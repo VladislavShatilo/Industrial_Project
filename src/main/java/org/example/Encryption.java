@@ -18,7 +18,7 @@ public class Encryption {
     private static final String TRANSFORMATION = "AES";
     private static final  String key = "ThisIsASecretKey";
 
-    public  void encryptFile(File inputFile, File outputFile)
+    public static void encryptFile(File inputFile, File outputFile)
             throws CryptoException {
         doCrypto(Cipher.ENCRYPT_MODE, key, inputFile, outputFile);
 
@@ -64,12 +64,17 @@ public class Encryption {
 //    public static void main(String[] args) {
 //        try {
 //
-//            File inputFile = new File("i.xml");
-//            File encryptedFile = new File("enc_xml.enc");
-//            File decryptedFile = new File("decryptedFile.txt");
-//
-//
+//            File inputFile = new File("zip_txt.zip");
+//            File encryptedFile = new File("zip_enc_txt.enc");
 //            encryptFile(inputFile, encryptedFile);
+//
+//            File inputFile1 = new File("zip_json.zip");
+//            File encryptedFile1 = new File("zip_enc_json.enc");
+//            encryptFile(inputFile1, encryptedFile1);
+//
+//            File inputFile2 = new File("zip_xml.zip");
+//            File encryptedFile2 = new File("zip_enc_xml.enc");
+//            encryptFile(inputFile2, encryptedFile2);
 //
 //
 //        } catch (CryptoException e) {
