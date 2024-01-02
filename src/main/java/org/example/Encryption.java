@@ -24,7 +24,7 @@ public class Encryption {
 
     }
 
-    public  void decryptFile( File inputFile, File outputFile)
+    public void  decryptFile( File inputFile, File outputFile)
             throws CryptoException {
         doCrypto(Cipher.DECRYPT_MODE, key, inputFile, outputFile);
 
@@ -64,15 +64,14 @@ public class Encryption {
 //    public static void main(String[] args) {
 //        try {
 //
-//            File inputFile = new File("inputFile.txt");
-//            File encryptedFile = new File("encryptedFile.enc");
+//            File inputFile = new File("i.xml");
+//            File encryptedFile = new File("enc_xml.enc");
 //            File decryptedFile = new File("decryptedFile.txt");
 //
 //
-//            encryptFile(key, inputFile, encryptedFile);
+//            encryptFile(inputFile, encryptedFile);
 //
 //
-//            decryptFile(key, encryptedFile, decryptedFile);
 //        } catch (CryptoException e) {
 //            System.err.println(e.getMessage());
 //        }

@@ -16,7 +16,7 @@ public class Manager {
 
     public  void callFunctionInput()
     {
-        file.nameInputFile += "." + file.typeInputFile;
+
 
         if(!file.isArchiveInputFile && file.isEncryptInputFile)
         {
@@ -25,7 +25,7 @@ public class Manager {
             {
                 case "txt"->{
                     Encryption encryption = new Encryption();
-                    File inputFile = new File("enc_inp_txt.enc");
+                    File inputFile = new File("enc_txt.enc");
                     File outputFile = new File("enc_out.txt");
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
@@ -44,7 +44,7 @@ public class Manager {
                 }
                 case "json"->{
                     Encryption encryption = new Encryption();
-                    File inputFile = new File("enc_inp_json.enc");
+                    File inputFile = new File("enc_json.enc");
                     File outputFile = new File("enc_out.json");
                     JSONWork jsonWork = new JSONWork();
                     try {
@@ -61,7 +61,7 @@ public class Manager {
                 }
                 case "xml"->{
                     Encryption encryption = new Encryption();
-                    File inputFile = new File("enc_inp_xml.enc");
+                    File inputFile = new File("enc_xml.enc");
                     File outputFile = new File("enc_out.xml");
                     XMLWork xmlWork = new XMLWork();
                     try {
@@ -88,12 +88,48 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt"->{
+                    PlainTextProcess txtWork = new PlainTextProcess();
+                    try {
+                        ZipWork zipWork = new ZipWork();
+                        Vector<String> data = txtWork.readFromPlainTextFile( zipWork.read(file.nameInputFile+".zip"));
+                        result = calculator.calculateSimple(data);
+
+
+                        File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
+                        fileToDelete.delete();
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+
+
 
                 }
                 case "json"->{
+                    JSONWork jsonWork = new JSONWork();
+                    try {
+                        ZipWork zipWork = new ZipWork();
+                        Vector<String> data = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+".zip"));
+                        result = calculator.calculateSimple(data);
+                        File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
+                        fileToDelete.delete();
 
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 case "xml"->{
+                    XMLWork xmlWork = new XMLWork();
+                    try {
+                        ZipWork zipWork = new ZipWork();
+                        Vector<String> data = xmlWork.readFromXML( zipWork.read(file.nameInputFile+".zip"));
+                        result = calculator.calculateSimple(data);
+                        File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
+                        fileToDelete.delete();
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
 
                 }
                 default -> {
@@ -144,6 +180,7 @@ public class Manager {
 
         }
         else {
+            file.nameInputFile += "." + file.typeInputFile;
             switch (file.typeInputFile)
             {
                 case "txt" -> {
@@ -192,7 +229,7 @@ public class Manager {
         PlainTextProcess plainTextProcess = new PlainTextProcess();
         plainTextProcess.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
         ZipWork zipWork = new ZipWork();
-        zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+        zipWork.write(file.nameOutputFile,file.typeOutputFile);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         boolean delete = fileToDelete.delete();
 
@@ -201,7 +238,7 @@ public class Manager {
         JSONWork jsonWork = new JSONWork();
         jsonWork.writeInJSON(result,  file.nameOutputFile + "." + file.typeOutputFile);
         ZipWork zipWork = new ZipWork();
-        zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+        zipWork.write(file.nameOutputFile,file.typeOutputFile);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         boolean delete = fileToDelete.delete();
 
@@ -211,7 +248,7 @@ public class Manager {
         XMLWork xmlWork = new XMLWork();
         xmlWork.writeInXml(result,file.nameOutputFile + "." + file.typeOutputFile);
         ZipWork zipWork = new ZipWork();
-        zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+        zipWork.write(file.nameOutputFile,file.typeOutputFile);
 
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         boolean delete = fileToDelete.delete();
@@ -274,7 +311,7 @@ public class Manager {
         {
             enc();
             ZipWork zipWork = new ZipWork();
-            zipWork.write(result,file.nameOutputFile,file.typeOutputFile);
+            zipWork.write(file.nameOutputFile,file.typeOutputFile);
             File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
             boolean delete = fileToDelete.delete();
 
