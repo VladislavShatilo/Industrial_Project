@@ -23,7 +23,6 @@ public class PlainTextProcess {
                 System.out.println("Error");
             }
 
-
         }
         return data;
     }

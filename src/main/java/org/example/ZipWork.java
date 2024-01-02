@@ -70,4 +70,12 @@ public class ZipWork
 
     }
 
+    public static void main(String[] args) {
+
+        write("enc_zip_json","enc");
+        write("enc_zip_txt","enc");
+        write("enc_zip_xml","enc");
+
+    }
+
 }

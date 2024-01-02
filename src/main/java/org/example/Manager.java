@@ -17,15 +17,15 @@ public class Manager {
     public  void callFunctionInput()
     {
 
-
         if(!file.isArchiveInputFile && file.isEncryptInputFile)
         {
+            Encryption encryption = new Encryption();
+            File inputFile = new File(file.nameInputFile + ".enc");
 
             switch (file.typeInputFile)
             {
                 case "txt"->{
-                    Encryption encryption = new Encryption();
-                    File inputFile = new File(file.nameInputFile + ".enc");
+
                     File outputFile = new File("enc_out.txt");
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
@@ -40,18 +40,15 @@ public class Manager {
                         System.out.println("Error decrypt file " + e.toString());
                     }
 
-
                 }
                 case "json"->{
-                    Encryption encryption = new Encryption();
-                    File inputFile = new File(file.nameInputFile + ".enc");
                     File outputFile = new File("enc_out.json");
                     JSONWork jsonWork = new JSONWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
                         Vector<String> data = jsonWork.readFromJSON("enc_out.json");
                         result = calculator.calculateSimple(data);
-                        boolean delete = outputFile.delete();
+                        outputFile.delete();
                     }
                     catch (Exception e)
                     {
@@ -60,8 +57,7 @@ public class Manager {
 
                 }
                 case "xml"->{
-                    Encryption encryption = new Encryption();
-                    File inputFile = new File(file.nameInputFile + ".enc");
+
                     File outputFile = new File("enc_out.xml");
                     XMLWork xmlWork = new XMLWork();
                     try {
@@ -79,22 +75,18 @@ public class Manager {
                 default -> {
 
                 }
-
             }
-
         }
         else if(file.isArchiveInputFile && !file.isEncryptInputFile)
         {
+            ZipWork zipWork = new ZipWork();
             switch (file.typeInputFile)
             {
                 case "txt"->{
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
-                        ZipWork zipWork = new ZipWork();
                         Vector<String> data = txtWork.readFromPlainTextFile( zipWork.read(file.nameInputFile+".zip"));
                         result = calculator.calculateSimple(data);
-
-
                         File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
                         fileToDelete.delete();
 
@@ -103,12 +95,10 @@ public class Manager {
                     }
 
 
-
                 }
                 case "json"->{
                     JSONWork jsonWork = new JSONWork();
                     try {
-                        ZipWork zipWork = new ZipWork();
                         Vector<String> data = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+".zip"));
                         result = calculator.calculateSimple(data);
                         File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
@@ -121,7 +111,7 @@ public class Manager {
                 case "xml"->{
                     XMLWork xmlWork = new XMLWork();
                     try {
-                        ZipWork zipWork = new ZipWork();
+
                         Vector<String> data = xmlWork.readFromXML( zipWork.read(file.nameInputFile+".zip"));
                         result = calculator.calculateSimple(data);
                         File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
@@ -218,12 +208,54 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt"->{
+                    PlainTextProcess txtWork = new PlainTextProcess();
+                    Encryption encryption = new Encryption();
+
+                    try {
+                        ZipWork zipWork = new ZipWork();
+                        File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
+                        File outputFile = new File("enc_out.txt");
+                        encryption.decryptFile(inputFile,outputFile);
+                        result = calculator.calculateSimple( txtWork.readFromPlainTextFile("enc_out.txt"));
+                        outputFile.delete();
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+
 
                 }
                 case "json"->{
+                    JSONWork jsonWork = new JSONWork();
+                    Encryption encryption = new Encryption();
+                    try {
+                        ZipWork zipWork = new ZipWork();
+                        File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
+                        File outputFile = new File("enc_out.json");
+                        encryption.decryptFile(inputFile,outputFile);
+                        result = calculator.calculateSimple( jsonWork.readFromJSON("enc_out.json"));
+                        outputFile.delete();
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+
 
                 }
                 case "xml"->{
+                    XMLWork xmlWork = new XMLWork();
+                    Encryption encryption = new Encryption();
+                    try {
+                        ZipWork zipWork = new ZipWork();
+                        File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
+                        File outputFile = new File("enc_out.xml");
+                        encryption.decryptFile(inputFile,outputFile);
+                        result = calculator.calculateSimple( xmlWork.readFromXML("enc_out.xml"));
+                        outputFile.delete();
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
 
                 }
                 default -> {
