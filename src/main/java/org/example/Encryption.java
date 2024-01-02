@@ -18,7 +18,7 @@ public class Encryption {
     private static final String TRANSFORMATION = "AES";
     private static final  String key = "ThisIsASecretKey";
 
-    public static void encryptFile(File inputFile, File outputFile)
+    public  void encryptFile(File inputFile, File outputFile)
             throws CryptoException {
         doCrypto(Cipher.ENCRYPT_MODE, key, inputFile, outputFile);
 

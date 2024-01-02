@@ -32,12 +32,12 @@ public class Manager {
                         encryption.decryptFile(inputFile,outputFile);
                         Vector<String> data = txtWork.readFromPlainTextFile("enc_out.txt");
                         result = calculator.calculateSimple(data);
-                        boolean delete = outputFile.delete();
+                        outputFile.delete();
 
                     }
                     catch (Exception e)
                     {
-                        System.out.println("Error decrypt file " + e.toString());
+                        System.out.println("Error decrypt file " + e);
                     }
 
                 }
@@ -52,7 +52,7 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
-                        System.out.println("Error decrypt file " + e.toString());
+                        System.out.println("Error decrypt file " + e);
                     }
 
                 }
@@ -64,11 +64,11 @@ public class Manager {
                         encryption.decryptFile(inputFile,outputFile);
                         Vector<String> data = xmlWork.readFromXML("enc_out.xml");
                         result = calculator.calculateSimple(data);
-                        boolean delete = outputFile.delete();
+                        outputFile.delete();
                     }
                     catch (Exception e)
                     {
-                        System.out.println("Error decrypt file " + e.toString());
+                        System.out.println("Error decrypt file " + e);
                     }
 
                 }
@@ -101,8 +101,7 @@ public class Manager {
                     try {
                         Vector<String> data = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+".zip"));
                         result = calculator.calculateSimple(data);
-                        File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
-                        fileToDelete.delete();
+                        new File( zipWork.read(file.nameInputFile+".zip")).delete();
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -111,59 +110,49 @@ public class Manager {
                 case "xml"->{
                     XMLWork xmlWork = new XMLWork();
                     try {
-
                         Vector<String> data = xmlWork.readFromXML( zipWork.read(file.nameInputFile+".zip"));
                         result = calculator.calculateSimple(data);
-                        File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
-                        fileToDelete.delete();
+                        new File( zipWork.read(file.nameInputFile+".zip")).delete();
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
 
                 }
-                default -> {
 
-                }
-
+                default -> throw new IllegalStateException("Unexpected value: " + file.typeInputFile);
             }
 
         }
         else if(file.isArchiveInputFile && file.ArchiveThanEncryptInput)
         {
+            Encryption encryption = new Encryption();
+            File inputFile = new File(file.nameInputFile + ".enc");
+            File outputFile = new File("enc_out.zip");
+            ZipWork zipWork = new ZipWork();
             switch (file.typeInputFile)
             {
                 case "txt"->{
-                    Encryption encryption = new Encryption();
-                    File inputFile = new File(file.nameInputFile + ".enc");
-                    File outputFile = new File("enc_out.zip");
-                    ZipWork zipWork = new ZipWork();
                     PlainTextProcess plainTextProcess = new PlainTextProcess();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-
                         Vector<String> data = plainTextProcess.readFromPlainTextFile(zipWork.read("enc_out.zip"));
                         result = calculator.calculateSimple(data);
-
                         File fileToDelete = new File( zipWork.read("enc_out.zip"));
                         fileToDelete.delete();
                     }
                     catch (Exception e)
                     {
-                        System.out.println("Error decrypt file " + e.toString());
+                        System.out.println("Error decrypt file " + e);
                     }
 
 
                 }
                 case "json"->{
-                    Encryption encryption = new Encryption();
-                    File inputFile = new File(file.nameInputFile + ".enc");
-                    File outputFile = new File("enc_out.zip");
-                    ZipWork zipWork = new ZipWork();
+
                     JSONWork jsonWork = new JSONWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-
                         Vector<String> data = jsonWork.readFromJSON(zipWork.read("enc_out.zip"));
                         result = calculator.calculateSimple(data);
                         File fileToDelete = new File( zipWork.read("enc_out.zip"));
@@ -171,20 +160,14 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
-                        System.out.println("Error decrypt file " + e.toString());
+                        System.out.println("Error decrypt file " + e);
                     }
-
 
                 }
                 case "xml"->{
-                    Encryption encryption = new Encryption();
-                    File inputFile = new File(file.nameInputFile + ".enc");
-                    File outputFile = new File("enc_out.zip");
-                    ZipWork zipWork = new ZipWork();
                     XMLWork xmlWork = new XMLWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-
                         Vector<String> data = xmlWork.readFromXML(zipWork.read("enc_out.zip"));
                         result = calculator.calculateSimple(data);
                         File fileToDelete = new File( zipWork.read("enc_out.zip"));
@@ -192,28 +175,26 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
-                        System.out.println("Error decrypt file " + e.toString());
+                        System.out.println("Error decrypt file " + e);
                     }
 
                 }
-                default -> {
 
-                }
-
+                default -> throw new IllegalStateException("Unexpected value: " + file.typeInputFile);
             }
 
         }
         else if(file.isArchiveInputFile && file.encryptThanArchiveInput)
         {
+            Encryption encryption = new Encryption();
+            ZipWork zipWork = new ZipWork();
+            File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
             switch (file.typeInputFile)
             {
                 case "txt"->{
                     PlainTextProcess txtWork = new PlainTextProcess();
-                    Encryption encryption = new Encryption();
-
                     try {
-                        ZipWork zipWork = new ZipWork();
-                        File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
+
                         File outputFile = new File("enc_out.txt");
                         encryption.decryptFile(inputFile,outputFile);
                         result = calculator.calculateSimple( txtWork.readFromPlainTextFile("enc_out.txt"));
@@ -227,27 +208,19 @@ public class Manager {
                 }
                 case "json"->{
                     JSONWork jsonWork = new JSONWork();
-                    Encryption encryption = new Encryption();
                     try {
-                        ZipWork zipWork = new ZipWork();
-                        File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
                         File outputFile = new File("enc_out.json");
                         encryption.decryptFile(inputFile,outputFile);
                         result = calculator.calculateSimple( jsonWork.readFromJSON("enc_out.json"));
                         outputFile.delete();
-
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
 
-
                 }
                 case "xml"->{
                     XMLWork xmlWork = new XMLWork();
-                    Encryption encryption = new Encryption();
                     try {
-                        ZipWork zipWork = new ZipWork();
-                        File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
                         File outputFile = new File("enc_out.xml");
                         encryption.decryptFile(inputFile,outputFile);
                         result = calculator.calculateSimple( xmlWork.readFromXML("enc_out.xml"));
@@ -256,12 +229,9 @@ public class Manager {
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-
-                }
-                default -> {
-
                 }
 
+                default -> throw new IllegalStateException("Unexpected value: " + file.typeInputFile);
             }
 
         }
@@ -270,11 +240,10 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt" -> {
-
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
-                            Vector<String> data = txtWork.readFromPlainTextFile(file.nameInputFile);
-                            result = calculator.calculateSimple(data);
+                        Vector<String> data = txtWork.readFromPlainTextFile(file.nameInputFile);
+                        result = calculator.calculateSimple(data);
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -317,7 +286,7 @@ public class Manager {
         ZipWork zipWork = new ZipWork();
         zipWork.write(file.nameOutputFile,file.typeOutputFile);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-        boolean delete = fileToDelete.delete();
+        fileToDelete.delete();
 
     }
     private void archiveJson(){
@@ -326,7 +295,7 @@ public class Manager {
         ZipWork zipWork = new ZipWork();
         zipWork.write(file.nameOutputFile,file.typeOutputFile);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-        boolean delete = fileToDelete.delete();
+        fileToDelete.delete();
 
 
     }
@@ -337,7 +306,7 @@ public class Manager {
         zipWork.write(file.nameOutputFile,file.typeOutputFile);
 
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-        boolean delete = fileToDelete.delete();
+        fileToDelete.delete();
 
 
     }
@@ -351,7 +320,7 @@ public class Manager {
         }
         catch (Exception e)
         {
-            System.out.println("Error encrypt file " + e.toString());
+            System.out.println("Error encrypt file " + e);
         }
     }
 
@@ -399,7 +368,7 @@ public class Manager {
             ZipWork zipWork = new ZipWork();
             zipWork.write(file.nameOutputFile,file.typeOutputFile);
             File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-            boolean delete = fileToDelete.delete();
+            fileToDelete.delete();
 
         }
         else {

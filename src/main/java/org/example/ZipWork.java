@@ -48,7 +48,7 @@ public class ZipWork
     }
 
 
-    public static void write(String fileName, String type) {
+    public void write(String fileName, String type) {
 
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(fileName + ".zip"));
              FileInputStream fis = new FileInputStream(fileName + "." + type);) {
@@ -70,12 +70,5 @@ public class ZipWork
 
     }
 
-    public static void main(String[] args) {
-
-        write("enc_zip_json","enc");
-        write("enc_zip_txt","enc");
-        write("enc_zip_xml","enc");
-
-    }
 
 }
