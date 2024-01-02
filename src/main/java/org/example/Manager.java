@@ -101,7 +101,8 @@ public class Manager {
                     try {
                         Vector<String> data = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+".zip"));
                         result = calculator.calculateSimple(data);
-                        new File( zipWork.read(file.nameInputFile+".zip")).delete();
+                       File file1= new File( zipWork.read(file.nameInputFile+".zip"));
+                       file1.delete();
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -112,7 +113,8 @@ public class Manager {
                     try {
                         Vector<String> data = xmlWork.readFromXML( zipWork.read(file.nameInputFile+".zip"));
                         result = calculator.calculateSimple(data);
-                        new File( zipWork.read(file.nameInputFile+".zip")).delete();
+                        File file1 =new File( zipWork.read(file.nameInputFile+".zip"));
+                        file1.delete();
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -182,6 +184,7 @@ public class Manager {
 
                 default -> throw new IllegalStateException("Unexpected value: " + file.typeInputFile);
             }
+            outputFile.delete();
 
         }
         else if(file.isArchiveInputFile && file.encryptThanArchiveInput)
@@ -203,7 +206,6 @@ public class Manager {
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-
 
                 }
                 case "json"->{
@@ -233,6 +235,7 @@ public class Manager {
 
                 default -> throw new IllegalStateException("Unexpected value: " + file.typeInputFile);
             }
+            inputFile.delete();
 
         }
         else {
@@ -272,11 +275,9 @@ public class Manager {
                     }
 
                 }
-
             }
 
         }
-
 
     }
 
@@ -310,18 +311,35 @@ public class Manager {
 
 
     }
-    private void enc(){
-        file.nameOutputFile += ".enc";
+    private void encArch() {
         Encryption encryption = new Encryption();
-        File inputFile = new File(file.nameInputFile);
-        File outputFile = new File(file.nameOutputFile);
+        File inputFile = new File(file.nameOutputFile +".zip");
+        File outputFile = new File(file.nameOutputFile + ".enc");
         try {
             encryption.encryptFile(inputFile, outputFile);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error encrypt file " + e);
         }
+        inputFile.delete();
+    }
+    private void archEnc(){
+        enc();
+        ZipWork zipWork = new ZipWork();
+        zipWork.write(file.nameOutputFile,"enc");
+        File fileToDelete = new File(file.nameOutputFile + ".enc");
+        fileToDelete.delete();
+    }
+
+    private void enc() {
+        Encryption encryption = new Encryption();
+        File inputFile = new File(file.nameOutputFile + file.typeOutputFile);
+        File outputFile = new File(file.nameOutputFile + ".enc");
+        try {
+            encryption.encryptFile(inputFile, outputFile);
+        } catch (Exception e) {
+            System.out.println("Error encrypt file " + e);
+        }
+        inputFile.delete();
     }
 
     public void callFunctionOutput() {
@@ -329,7 +347,24 @@ public class Manager {
 
         if(file.isEncryptOutputFile && !file.isArchiveOutputFile)
         {
-            enc();
+
+            switch (file.typeOutputFile) {
+                case "txt" -> {
+                    PlainTextProcess plainTextProcess = new PlainTextProcess();
+                    plainTextProcess.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
+                    enc();
+                }
+                case "json" -> {
+                    JSONWork jsonWork = new JSONWork();
+                    jsonWork.writeInJSON(result, file.nameOutputFile + file.typeOutputFile);
+                    enc();
+                }
+                case "xml" -> {
+                    XMLWork xmlWork = new XMLWork();
+                    xmlWork.writeInXml(result,file.nameOutputFile + file.typeOutputFile);
+                    enc();
+                }
+            }
         }
 
         else if(!file.isEncryptOutputFile && file.isArchiveOutputFile)
@@ -349,26 +384,41 @@ public class Manager {
             switch (file.typeOutputFile) {
                 case "txt" -> {
                     archiveTxt();
-                    enc();
+                    encArch();
                 }
                 case "json" -> {
                     archiveJson();
-                    enc();
+                    encArch();
                 }
                 case "xml" -> {
                     archiveXml();
-                    enc();
+                    encArch();
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
             }
         }
         else if(file.isEncryptOutputFile && file.encryptThanArchiveOutput)
         {
-            enc();
-            ZipWork zipWork = new ZipWork();
-            zipWork.write(file.nameOutputFile,file.typeOutputFile);
-            File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
-            fileToDelete.delete();
+            switch (file.typeOutputFile) {
+                case "txt" -> {
+                    PlainTextProcess plainTextProcess = new PlainTextProcess();
+                    plainTextProcess.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
+                    archEnc();
+
+                }
+                case "json" -> {
+                    JSONWork jsonWork = new JSONWork();
+                    jsonWork.writeInJSON(result, file.nameOutputFile + file.typeOutputFile);
+                    archEnc();
+                }
+                case "xml" -> {
+                    XMLWork xmlWork = new XMLWork();
+                    xmlWork.writeInXml(result,file.nameOutputFile + file.typeOutputFile);
+                    archEnc();
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
+            }
+
 
         }
         else {
