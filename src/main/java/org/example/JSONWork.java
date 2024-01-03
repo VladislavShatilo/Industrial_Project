@@ -41,14 +41,12 @@ public  class JSONWork {
             try (PrintWriter out = new PrintWriter(new FileWriter(filename))){
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-
                 for(int i = 0; i<result.size();i++)
                 {
                      elem.put(("Answer " + i), result.get(i));
                 }
                 String jsonString = gson.toJson(elem);
                 out.write(jsonString);
-
 
             } catch (Exception e) {
                 System.out.println("Error open Json writer");
