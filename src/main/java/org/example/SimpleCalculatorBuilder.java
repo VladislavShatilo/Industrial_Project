@@ -6,6 +6,15 @@ import java.util.Vector;
 public class SimpleCalculatorBuilder implements CalculatorBuilderInterface {
 
     private final Vector<String> arrayStrings = new Vector<>();
+    private static SimpleCalculatorBuilder instance;
+    private SimpleCalculatorBuilder(){}
+
+    public static SimpleCalculatorBuilder getInstance(){
+        if(instance == null){
+            instance = new SimpleCalculatorBuilder();
+        }
+        return instance;
+    }
     @Override
     public CalculatorBuilderInterface calculate(Vector<String> exp) {
         Stack<Double> values = new Stack<>();

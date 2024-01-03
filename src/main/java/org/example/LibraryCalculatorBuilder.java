@@ -6,7 +6,16 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import java.util.Vector;
 
 public class LibraryCalculatorBuilder implements CalculatorBuilderInterface{
-   private final Vector<String> result = new Vector<>();
+    private static LibraryCalculatorBuilder instance;
+    private LibraryCalculatorBuilder(){}
+
+    public static LibraryCalculatorBuilder getInstance(){
+        if(instance == null){
+            instance = new LibraryCalculatorBuilder();
+        }
+        return instance;
+    }
+    private final Vector<String> result = new Vector<>();
     @Override
     public CalculatorBuilderInterface calculate(Vector<String> expr) {
 

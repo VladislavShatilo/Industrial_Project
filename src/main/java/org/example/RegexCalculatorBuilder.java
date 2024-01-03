@@ -5,6 +5,15 @@ import java.util.Vector;
 
 public class RegexCalculatorBuilder implements CalculatorBuilderInterface{
    private final Vector<String> arrayStrings = new Vector<>();
+    private static RegexCalculatorBuilder instance;
+    private RegexCalculatorBuilder(){}
+
+    public static RegexCalculatorBuilder getInstance(){
+        if(instance == null){
+            instance = new RegexCalculatorBuilder();
+        }
+        return instance;
+    }
     @Override
     public CalculatorBuilderInterface calculate(Vector<String> exp) {
         Stack<Double> values = new Stack<>();

@@ -5,6 +5,8 @@ import java.util.Vector;
 public interface CalculatorBuilderInterface {
     CalculatorBuilderInterface calculate(Vector<String> exp);
 
+
+
     Vector<String> build();
     static boolean isOperator(char operator) {
         return operator == '+' || operator == '*' || operator == '/' || operator == '-';

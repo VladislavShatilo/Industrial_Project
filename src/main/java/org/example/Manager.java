@@ -269,18 +269,18 @@ public class Manager {
         switch (file.typeOfCalculate) {
 
             case "1" -> {
-                SimpleCalculatorBuilder simpleCalculatorBuilder= new SimpleCalculatorBuilder();
+                SimpleCalculatorBuilder simpleCalculatorBuilder = SimpleCalculatorBuilder.getInstance();
                 result = simpleCalculatorBuilder.calculate(result).build();
 
             }
             case "2" -> {
-                RegexCalculatorBuilder regexCalculatorBuilder = new RegexCalculatorBuilder();
+                RegexCalculatorBuilder regexCalculatorBuilder = RegexCalculatorBuilder.getInstance();
 
                 result = regexCalculatorBuilder.calculate(result).build();
 
             }
             case "3" -> {
-                LibraryCalculatorBuilder libraryCalculatorBuilder = new LibraryCalculatorBuilder();
+                LibraryCalculatorBuilder libraryCalculatorBuilder = LibraryCalculatorBuilder.getInstance();
                 result = libraryCalculatorBuilder.calculate(result).build();
             }
             default -> throw new IllegalStateException("Unexpected value: " + file.typeOfCalculate);
