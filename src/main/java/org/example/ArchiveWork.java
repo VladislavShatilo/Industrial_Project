@@ -9,7 +9,7 @@ public class ArchiveWork
 {
     public String read(String fileName)
     {
-        String unpackedFile = new String();
+        String unpackedFile = "";
         try (ZipInputStream zin = new ZipInputStream(new FileInputStream(fileName)))
         {
             ZipEntry entry;
@@ -21,13 +21,13 @@ public class ArchiveWork
 
                 unpackedFile = name;
 
-                FileOutputStream fout = new FileOutputStream(unpackedFile);
+                FileOutputStream fileOutputStream = new FileOutputStream(unpackedFile);
                 for (int c = zin.read(); c != -1; c = zin.read()) {
-                    fout.write(c);
+                    fileOutputStream.write(c);
                 }
-                fout.flush();
+                fileOutputStream.flush();
                 zin.closeEntry();
-                fout.close();
+                fileOutputStream.close();
             }
 
         }
@@ -42,7 +42,7 @@ public class ArchiveWork
     public void write(String fileName, String type, String typeArchive) {
 
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(fileName + "." +typeArchive));
-             FileInputStream fis = new FileInputStream(fileName + "." + type);) {
+             FileInputStream fis = new FileInputStream(fileName + "." + type)) {
             ZipEntry entry1 = new ZipEntry(fileName + "." + type);
             zipOutputStream.putNextEntry(entry1);
 

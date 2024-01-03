@@ -20,20 +20,20 @@ public class Encryption {
 
     public void encryptFile(File inputFile, File outputFile)
             throws CryptoException {
-        doCrypto(Cipher.ENCRYPT_MODE, key, inputFile, outputFile);
+        doCrypto(Cipher.ENCRYPT_MODE, inputFile, outputFile);
 
     }
 
     public  void  decryptFile( File inputFile, File outputFile)
             throws CryptoException {
-        doCrypto(Cipher.DECRYPT_MODE, key, inputFile, outputFile);
+        doCrypto(Cipher.DECRYPT_MODE, inputFile, outputFile);
 
     }
 
-    private static void doCrypto(int cipherMode, String key, File inputFile, File outputFile)
+    private static void doCrypto(int cipherMode, File inputFile, File outputFile)
             throws CryptoException {
         try {
-            Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+            Key secretKey = new SecretKeySpec(Encryption.key.getBytes(), ALGORITHM);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(cipherMode, secretKey);
 
@@ -61,17 +61,5 @@ public class Encryption {
         }
     }
 
-//    public static void main(String[] args) {
-//        try {
-//
-//
-//            File input = new File("rar_enc_xml.rar");
-//            File outputFile = new File("rar_enc_xml.enc");
-//            encryptFile(input, outputFile);
-//
-//
-//        } catch (CryptoException e) {
-//            System.err.println(e.getMessage());
-//        }
-//    }
+
 }

@@ -2,7 +2,6 @@ package org.example;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -12,8 +11,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 public class XMLWork {
@@ -22,17 +19,16 @@ public class XMLWork {
         String expString;
         File file = new File(fileName);
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
         Document doc;
         try {
-            doc = (Document) dbf.newDocumentBuilder().parse(file);
+            doc = dbf.newDocumentBuilder().parse(file);
         } catch (Exception e) {
             System.out.println("DocumentBuilderFactory Error");
             return null;
 
         }
 
-        Node rootNode = doc.getFirstChild();
+
         NodeList rootList = doc.getDocumentElement().getElementsByTagName("exp");
 
         for (int i = 0; i < rootList.getLength(); i++)
@@ -56,10 +52,9 @@ public class XMLWork {
             Element answers = doc.createElement("Answers");
             rootElement.appendChild(answers);
             for(int i = 0; i<result.size();i++){
-                Element answer  =doc.createElement(("Answer"+Integer.toString(i)));
+                Element answer  =doc.createElement(("Answer"+i));
                 answer.appendChild(doc.createTextNode(result.get(i)));
                 answers.appendChild(answer);
-              //  element.appendChild();
             }
 
 
@@ -69,7 +64,7 @@ public class XMLWork {
             Transformer transformer = transformerFactory.newTransformer();
 
             transformer.setOutputProperty("indent", "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+            transformer.setOutputProperty("{https://xml.apache.org/xslt}indent-amount", "2");
 
             DOMSource source = new DOMSource(doc);
 
@@ -77,9 +72,7 @@ public class XMLWork {
             File file = new File(fileName);
             StreamResult res = new StreamResult(file);
 
-
             transformer.transform(source, res);
-
 
 
         }

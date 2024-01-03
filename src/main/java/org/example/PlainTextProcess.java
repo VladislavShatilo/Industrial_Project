@@ -10,7 +10,7 @@ public class PlainTextProcess {
 
     private final Vector<String> data  = new Vector<>();
 
-    public Vector<String> readFromPlainTextFile(String fileName) throws Exception {
+    public Vector<String> readFromPlainTextFile(String fileName)  {
         {
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
                 String line;

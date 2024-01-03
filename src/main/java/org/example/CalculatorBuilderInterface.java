@@ -44,7 +44,7 @@ public interface CalculatorBuilderInterface {
     {
         int prior1 = getPriority(operator1);
         int prior2 = getPriority(operator2);
-        return prior1 >= prior2;
+        return prior1 < prior2;
     }
 
 

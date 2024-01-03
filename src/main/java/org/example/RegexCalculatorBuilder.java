@@ -25,28 +25,27 @@ public class RegexCalculatorBuilder implements CalculatorBuilderInterface{
             char[] characters = string.toCharArray();
 
             for (int j = 0; j < characters.length; j++) {
-                if (Character.isDigit(characters[j])) {
+                String ch = Character.toString(string.charAt(j));
+                if (ch.matches("\\d+(\\.\\d+)?") || ch.equals(".")) {
                     StringBuilder sb = new StringBuilder();
                     while (j < characters.length && (Character.isDigit(characters[j]) || characters[j] == '.')) {
                         sb.append(characters[j++]);
                     }
                     values.push(Double.parseDouble(sb.toString()));
                     j--;
-                } else if (characters[j] == '(') {
+                } else if (ch.equals("(")) {
                     operators.push(characters[j]);
-                } else if (characters[j] == ')') {
+                } else if (ch.equals(")")) {
                     while (operators.peek() != '(') {
                         values.push(CalculatorBuilderInterface.calculateSimpleExp(operators.pop(), values.pop(), values.pop()));
                     }
                     operators.pop();
                 } else if (CalculatorBuilderInterface.isOperator(characters[j])) {
-                    while (!operators.empty() && !CalculatorBuilderInterface.isMorePriority((characters[j]), operators.peek())) {
+                    while (!operators.empty() && CalculatorBuilderInterface.isMorePriority((characters[j]), operators.peek())) {
                         values.push(CalculatorBuilderInterface.calculateSimpleExp(operators.pop(), values.pop(), values.pop()));
                     }
                     operators.push(characters[j]);
                 }
-
-
 
             }
             while (!operators.empty()) {
@@ -59,7 +58,9 @@ public class RegexCalculatorBuilder implements CalculatorBuilderInterface{
 
 
         }
-        return this;
+        return this ;
+
+
     }
 
         @Override

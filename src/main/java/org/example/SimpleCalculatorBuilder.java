@@ -43,7 +43,7 @@ public class SimpleCalculatorBuilder implements CalculatorBuilderInterface {
                     }
                     operators.pop();
                 } else if (CalculatorBuilderInterface.isOperator(characters[j])) {
-                    while (!operators.empty() && !CalculatorBuilderInterface.isMorePriority((characters[j]), operators.peek())) {
+                    while (!operators.empty() && CalculatorBuilderInterface.isMorePriority((characters[j]), operators.peek())) {
                         values.push(CalculatorBuilderInterface.calculateSimpleExp(operators.pop(), values.pop(), values.pop()));
                     }
                     operators.push(characters[j]);

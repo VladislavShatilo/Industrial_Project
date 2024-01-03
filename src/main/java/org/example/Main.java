@@ -6,7 +6,7 @@ public class Main {
         ChooseFileInformation fillFileInfo = new ChooseFileInformation(file);
         Manager manage = new Manager(file);
         fillFileInfo.start();
-        // fillFileInfo.isArchiveInputFile();
+
         fillFileInfo.typeInputFileChoice();
         fillFileInfo.nameInputFile();
 
@@ -18,11 +18,11 @@ public class Main {
 
 
 
-        //fillFileInfo.isEncryptOutputFile();
-        // fillFileInfo.isArchiveOutputFile();
-
         manage.callFunctionInput();
         manage.callFunctionOutput();
+
+
+
     }
 
 

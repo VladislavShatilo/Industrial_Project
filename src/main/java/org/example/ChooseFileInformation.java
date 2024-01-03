@@ -65,12 +65,13 @@ public class ChooseFileInformation
     public void encryptArchiveInputType()
     {
         int chose;
-        System.out.println("What type of input file do you want to work with?\n" +
-                "1. Just file\n" +
-                "2. Encrypt file\n" +
-                "3. Archive file\n" +
-                "4. Encrypt -> Archive file\n" +
-                "5. Archive -> Encrypt file");
+        System.out.println("""
+                What type of input file do you want to work with?
+                1. Just file
+                2. Encrypt file
+                3. Archive file
+                4. Encrypt -> Archive file
+                5. Archive -> Encrypt file""");
         do {
             chose= scan.nextInt();
             if (chose == 1 || chose == 2 || chose == 3 || chose == 4 || chose ==5) {
@@ -117,10 +118,11 @@ public class ChooseFileInformation
     }
     public void choseTypeOfCalculation() {
         int chose;
-        System.out.println("What type of calculation method do you want to work with?\n" +
-                "1. Recursion\n" +
-                "2. Regex\n" +
-                "3. Library");
+        System.out.println("""
+                What type of calculation method do you want to work with?
+                1. Recursion
+                2. Regex
+                3. Library""");
 
         do {
             chose = scan.nextInt();
@@ -151,12 +153,13 @@ public class ChooseFileInformation
     public void encryptArchiveOutputType()
     {
         int chose;
-        System.out.println("What type of output file do you want to work with?\n" +
-                "1. Just file\n" +
-                "2. Encrypt file\n" +
-                "3. Archive file\n" +
-                "4. Encrypt -> Archive file\n" +
-                "5. Archive -> Encrypt file");
+        System.out.println("""
+                What type of output file do you want to work with?
+                1. Just file
+                2. Encrypt file
+                3. Archive file
+                4. Encrypt -> Archive file
+                5. Archive -> Encrypt file""");
         do {
             chose= scan.nextInt();
             if (chose == 1 || chose == 2 || chose == 3 || chose == 4 || chose ==5) {

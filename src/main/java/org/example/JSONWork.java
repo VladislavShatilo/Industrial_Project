@@ -9,7 +9,6 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.Vector;
 
 public  class JSONWork {
@@ -36,10 +35,8 @@ public  class JSONWork {
         }
 
         public void writeInJSON(Vector<String> result, String filename){
-            JSONObject json = new JSONObject();
-            JSONArray arr = new JSONArray();
+
             JSONObject elem = new JSONObject();
-            Vector<JSONObject> elem1 = new Vector<>();
 
             try (PrintWriter out = new PrintWriter(new FileWriter(filename))){
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -47,7 +44,7 @@ public  class JSONWork {
 
                 for(int i = 0; i<result.size();i++)
                 {
-                    elem.put(("Answer "+Integer.toString(i)),result.get(i));
+                     elem.put(("Answer " + i), result.get(i));
                 }
                 String jsonString = gson.toJson(elem);
                 out.write(jsonString);
