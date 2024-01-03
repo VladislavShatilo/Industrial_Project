@@ -48,9 +48,9 @@ public class ZipWork
     }
 
 
-    public void write(String fileName, String type) {
+    public void write(String fileName, String type, String typeArchive) {
 
-        try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(fileName + ".zip"));
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(fileName + "." +typeArchive));
              FileInputStream fis = new FileInputStream(fileName + "." + type);) {
             ZipEntry entry1 = new ZipEntry(fileName + "." + type);
             zipOutputStream.putNextEntry(entry1);

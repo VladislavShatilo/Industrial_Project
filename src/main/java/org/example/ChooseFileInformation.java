@@ -88,22 +88,26 @@ public class ChooseFileInformation
                 file.isEncryptInputFile = false;
             }
             case 2 -> {
+
                 file.isArchiveInputFile = false;
                 file.isEncryptInputFile = true;
             }
             case 3 -> {
                 file.isArchiveInputFile = true;
                 file.isEncryptInputFile = false;
+                chooseInputArchive();
             }
             case 4 -> {
                 file.isArchiveInputFile = true;
                 file.isEncryptInputFile = true;
                 file.encryptThanArchiveInput =true;
+                chooseInputArchive();
             }
             case 5 ->{
                 file.isArchiveInputFile = true;
                 file.isEncryptInputFile = true;
                 file.ArchiveThanEncryptInput =true;
+                chooseInputArchive();
             }
             default -> {
             }
@@ -176,17 +180,20 @@ public class ChooseFileInformation
             case 3 -> {
                 file.isArchiveOutputFile = true;
                 file.isEncryptOutputFile = false;
+                chooseOutputArchive();
             }
             case 4-> {
                 file.isArchiveOutputFile = true;
                 file.isEncryptOutputFile= true;
                 file.encryptThanArchiveOutput= true;
+                chooseOutputArchive();
 
             }
             case 5->{
                 file.isArchiveOutputFile = true;
                 file.isEncryptOutputFile= true;
                 file.ArchiveThanEncryptOutput =true;
+                chooseOutputArchive();
             }
             default -> {
             }
@@ -226,9 +233,58 @@ public class ChooseFileInformation
         file.nameOutputFile = scan.next() ;
 
     }
+     private void chooseInputArchive()
+     {
+         System.out.println("""
+                 Choose type of archive
+                 1 .zip
+                 2. .rar""");
+         int chose;
+         do {
+             chose= scan.nextInt();
+             if (chose == 1 || chose == 2) {
+                 correctData = true;
+             }
+             else {
+                 System.out.println("Incorrect data, please input again!");
+                 correctData = false;
+             }
+         }while(!correctData);
+
+         switch (chose) {
+             case 1 -> file.typeOfInputArchive = "zip";
+             case 2 -> file.typeOfInputArchive = "rar";
+             default -> throw new IllegalStateException("Unexpected value: " + chose);
+         }
 
 
+     }
+    private void chooseOutputArchive()
+    {
+        System.out.println("""
+                 Choose type of output archive
+                 1 .zip
+                 2. .rar""");
+        int chose;
+        do {
+            chose= scan.nextInt();
+            if (chose == 1 || chose == 2) {
+                correctData = true;
+            }
+            else {
+                System.out.println("Incorrect data, please input again!");
+                correctData = false;
+            }
+        }while(!correctData);
 
+        switch (chose) {
+            case 1 -> file.typeOfOutputArchive = "zip";
+            case 2 -> file.typeOfOutputArchive = "rar";
+            default -> throw new IllegalStateException("Unexpected value: " + chose);
+        }
+
+
+    }
 
 }
 

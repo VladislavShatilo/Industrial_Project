@@ -286,7 +286,7 @@ public class Manager {
         PlainTextProcess plainTextProcess = new PlainTextProcess();
         plainTextProcess.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
         ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,file.typeOutputFile);
+        zipWork.write(file.nameOutputFile,file.typeOutputFile, file.typeOfOutputArchive);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         fileToDelete.delete();
 
@@ -295,7 +295,7 @@ public class Manager {
         JSONWork jsonWork = new JSONWork();
         jsonWork.writeInJSON(result,  file.nameOutputFile + "." + file.typeOutputFile);
         ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,file.typeOutputFile);
+        zipWork.write(file.nameOutputFile,file.typeOutputFile,file.typeOfOutputArchive);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         fileToDelete.delete();
 
@@ -305,7 +305,7 @@ public class Manager {
         XMLWork xmlWork = new XMLWork();
         xmlWork.writeInXml(result,file.nameOutputFile + "." + file.typeOutputFile);
         ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,file.typeOutputFile);
+        zipWork.write(file.nameOutputFile,file.typeOutputFile,file.typeOfOutputArchive);
 
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         fileToDelete.delete();
@@ -326,7 +326,7 @@ public class Manager {
     private void archEnc(){
         enc();
         ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,"enc");
+        zipWork.write(file.nameOutputFile,"enc",file.typeOfOutputArchive);
         File fileToDelete = new File(file.nameOutputFile + ".enc");
         fileToDelete.delete();
     }

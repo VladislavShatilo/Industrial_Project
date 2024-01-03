@@ -6,9 +6,10 @@ package org.example;
        public boolean isEncryptInputFile;
        public boolean isArchiveInputFile;
        public boolean encryptThanArchiveInput;
-
        public boolean ArchiveThanEncryptInput;
-       public String typeOfCalculate;
+       public String typeOfInputArchive;
+
+
 
 
         public String typeOutputFile;
@@ -18,6 +19,8 @@ package org.example;
         public boolean encryptThanArchiveOutput;
 
         public boolean ArchiveThanEncryptOutput;
+        public String typeOfOutputArchive;
+        public String typeOfCalculate;
 
     }
 
