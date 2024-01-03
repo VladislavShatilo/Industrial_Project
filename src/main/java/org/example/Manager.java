@@ -6,7 +6,6 @@ import java.util.Vector;
 public class Manager {
     private final FileInformationStructure file;
     private  Vector<String> result;
-    private final Calculator calculator = new Calculator();
 
     Manager(FileInformationStructure basicFile)
 
@@ -75,14 +74,14 @@ public class Manager {
         }
         else if(file.isArchiveInputFile && !file.isEncryptInputFile)
         {
-            ZipWork zipWork = new ZipWork();
+            ArchiveWork archiveWork = new ArchiveWork();
             switch (file.typeInputFile)
             {
                 case "txt"->{
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
-                        result = txtWork.readFromPlainTextFile( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
-                        File fileToDelete = new File( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        result = txtWork.readFromPlainTextFile( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        File fileToDelete = new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                         fileToDelete.delete();
 
                     } catch (Exception e) {
@@ -94,8 +93,8 @@ public class Manager {
                 case "json"->{
                     JSONWork jsonWork = new JSONWork();
                     try {
-                        result = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
-                       File file1= new File( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        result = jsonWork.readFromJSON( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                       File file1= new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                        file1.delete();
 
                     } catch (Exception e) {
@@ -105,8 +104,8 @@ public class Manager {
                 case "xml"->{
                     XMLWork xmlWork = new XMLWork();
                     try {
-                        result = xmlWork.readFromXML( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
-                        File file1 =new File( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        result = xmlWork.readFromXML( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        File file1 =new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                         file1.delete();
 
                     } catch (Exception e) {
@@ -124,15 +123,15 @@ public class Manager {
             Encryption encryption = new Encryption();
             File inputFile = new File(file.nameInputFile + ".enc");
             File outputFile = new File("enc_out." + file.typeOfInputArchive);
-            ZipWork zipWork = new ZipWork();
+            ArchiveWork archiveWork = new ArchiveWork();
             switch (file.typeInputFile)
             {
                 case "txt"->{
                     PlainTextProcess plainTextProcess = new PlainTextProcess();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        result = plainTextProcess.readFromPlainTextFile(zipWork.read("enc_out." + file.typeOfInputArchive));
-                        File fileToDelete = new File( zipWork.read("enc_out." + file.typeOfInputArchive));
+                        result = plainTextProcess.readFromPlainTextFile(archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
                         fileToDelete.delete();
                     }
                     catch (Exception e)
@@ -146,8 +145,8 @@ public class Manager {
                     JSONWork jsonWork = new JSONWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        result = jsonWork.readFromJSON(zipWork.read("enc_out." + file.typeOfInputArchive));
-                        File fileToDelete = new File( zipWork.read("enc_out." + file.typeOfInputArchive));
+                        result = jsonWork.readFromJSON(archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
                         fileToDelete.delete();
                     }
                     catch (Exception e)
@@ -160,8 +159,8 @@ public class Manager {
                     XMLWork xmlWork = new XMLWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        result = xmlWork.readFromXML(zipWork.read("enc_out." + file.typeOfInputArchive));
-                        File fileToDelete = new File( zipWork.read("enc_out." + file.typeOfInputArchive));
+                        result = xmlWork.readFromXML(archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
                         fileToDelete.delete();
                     }
                     catch (Exception e)
@@ -179,8 +178,8 @@ public class Manager {
         else if(file.isArchiveInputFile && file.encryptThanArchiveInput)
         {
             Encryption encryption = new Encryption();
-            ZipWork zipWork = new ZipWork();
-            File inputFile = new File( zipWork.read(file.nameInputFile+"." + file.typeOfInputArchive));
+            ArchiveWork archiveWork = new ArchiveWork();
+            File inputFile = new File( archiveWork.read(file.nameInputFile+"." + file.typeOfInputArchive));
             switch (file.typeInputFile)
             {
                 case "txt"->{
@@ -268,15 +267,21 @@ public class Manager {
     }
     private void calculate(){
         switch (file.typeOfCalculate) {
+
             case "1" -> {
-                result = calculator.calculateSimple(result);
+                SimpleCalculatorBuilder simpleCalculatorBuilder= new SimpleCalculatorBuilder();
+                result = simpleCalculatorBuilder.calculate(result).build();
+
             }
             case "2" -> {
-                result = calculator.calculateWithRegex(result);
+                RegexCalculatorBuilder regexCalculatorBuilder = new RegexCalculatorBuilder();
+
+                result = regexCalculatorBuilder.calculate(result).build();
 
             }
             case "3" -> {
-                result = calculator.calculateLibrary(result);
+                LibraryCalculatorBuilder libraryCalculatorBuilder = new LibraryCalculatorBuilder();
+                result = libraryCalculatorBuilder.calculate(result).build();
             }
             default -> throw new IllegalStateException("Unexpected value: " + file.typeOfCalculate);
         }
@@ -285,8 +290,8 @@ public class Manager {
     private void archiveTxt(){
         PlainTextProcess plainTextProcess = new PlainTextProcess();
         plainTextProcess.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
-        ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,file.typeOutputFile, file.typeOfOutputArchive);
+        ArchiveWork archiveWork = new ArchiveWork();
+        archiveWork.write(file.nameOutputFile,file.typeOutputFile, file.typeOfOutputArchive);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         fileToDelete.delete();
 
@@ -294,8 +299,8 @@ public class Manager {
     private void archiveJson(){
         JSONWork jsonWork = new JSONWork();
         jsonWork.writeInJSON(result,  file.nameOutputFile + "." + file.typeOutputFile);
-        ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,file.typeOutputFile,file.typeOfOutputArchive);
+        ArchiveWork archiveWork = new ArchiveWork();
+        archiveWork.write(file.nameOutputFile,file.typeOutputFile,file.typeOfOutputArchive);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         fileToDelete.delete();
 
@@ -304,8 +309,8 @@ public class Manager {
     private void archiveXml(){
         XMLWork xmlWork = new XMLWork();
         xmlWork.writeInXml(result,file.nameOutputFile + "." + file.typeOutputFile);
-        ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,file.typeOutputFile,file.typeOfOutputArchive);
+        ArchiveWork archiveWork = new ArchiveWork();
+        archiveWork.write(file.nameOutputFile,file.typeOutputFile,file.typeOfOutputArchive);
 
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
         fileToDelete.delete();
@@ -325,8 +330,8 @@ public class Manager {
     }
     private void archEnc(){
         enc();
-        ZipWork zipWork = new ZipWork();
-        zipWork.write(file.nameOutputFile,"enc",file.typeOfOutputArchive);
+        ArchiveWork archiveWork = new ArchiveWork();
+        archiveWork.write(file.nameOutputFile,"enc",file.typeOfOutputArchive);
         File fileToDelete = new File(file.nameOutputFile + ".enc");
         fileToDelete.delete();
     }

@@ -1,19 +1,11 @@
 package org.example;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import java.io.*;
-import java.util.List;
-import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-public class ZipWork
+public class ArchiveWork
 {
     public String read(String fileName)
     {
