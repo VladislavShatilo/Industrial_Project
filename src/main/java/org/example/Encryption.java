@@ -65,9 +65,9 @@ public class Encryption {
 //        try {
 //
 //
-//            File encryptedFile = new File("1.enc");
-//            File outputFile = new File("2.xml");
-//            decryptFile(encryptedFile, outputFile);
+//            File input = new File("rar_enc_xml.rar");
+//            File outputFile = new File("rar_enc_xml.enc");
+//            encryptFile(input, outputFile);
 //
 //
 //        } catch (CryptoException e) {

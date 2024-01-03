@@ -81,8 +81,8 @@ public class Manager {
                 case "txt"->{
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
-                        result = txtWork.readFromPlainTextFile( zipWork.read(file.nameInputFile+".zip"));
-                        File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
+                        result = txtWork.readFromPlainTextFile( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        File fileToDelete = new File( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                         fileToDelete.delete();
 
                     } catch (Exception e) {
@@ -94,8 +94,8 @@ public class Manager {
                 case "json"->{
                     JSONWork jsonWork = new JSONWork();
                     try {
-                        result = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+".zip"));
-                       File file1= new File( zipWork.read(file.nameInputFile+".zip"));
+                        result = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                       File file1= new File( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                        file1.delete();
 
                     } catch (Exception e) {
@@ -105,8 +105,8 @@ public class Manager {
                 case "xml"->{
                     XMLWork xmlWork = new XMLWork();
                     try {
-                        result = xmlWork.readFromXML( zipWork.read(file.nameInputFile+".zip"));
-                        File file1 =new File( zipWork.read(file.nameInputFile+".zip"));
+                        result = xmlWork.readFromXML( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        File file1 =new File( zipWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                         file1.delete();
 
                     } catch (Exception e) {
@@ -123,7 +123,7 @@ public class Manager {
         {
             Encryption encryption = new Encryption();
             File inputFile = new File(file.nameInputFile + ".enc");
-            File outputFile = new File("enc_out.zip");
+            File outputFile = new File("enc_out." + file.typeOfInputArchive);
             ZipWork zipWork = new ZipWork();
             switch (file.typeInputFile)
             {
@@ -131,8 +131,8 @@ public class Manager {
                     PlainTextProcess plainTextProcess = new PlainTextProcess();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        result = plainTextProcess.readFromPlainTextFile(zipWork.read("enc_out.zip"));
-                        File fileToDelete = new File( zipWork.read("enc_out.zip"));
+                        result = plainTextProcess.readFromPlainTextFile(zipWork.read("enc_out." + file.typeOfInputArchive));
+                        File fileToDelete = new File( zipWork.read("enc_out." + file.typeOfInputArchive));
                         fileToDelete.delete();
                     }
                     catch (Exception e)
@@ -146,8 +146,8 @@ public class Manager {
                     JSONWork jsonWork = new JSONWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        result = jsonWork.readFromJSON(zipWork.read("enc_out.zip"));
-                        File fileToDelete = new File( zipWork.read("enc_out.zip"));
+                        result = jsonWork.readFromJSON(zipWork.read("enc_out." + file.typeOfInputArchive));
+                        File fileToDelete = new File( zipWork.read("enc_out." + file.typeOfInputArchive));
                         fileToDelete.delete();
                     }
                     catch (Exception e)
@@ -160,8 +160,8 @@ public class Manager {
                     XMLWork xmlWork = new XMLWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        result = xmlWork.readFromXML(zipWork.read("enc_out.zip"));
-                        File fileToDelete = new File( zipWork.read("enc_out.zip"));
+                        result = xmlWork.readFromXML(zipWork.read("enc_out." + file.typeOfInputArchive));
+                        File fileToDelete = new File( zipWork.read("enc_out." + file.typeOfInputArchive));
                         fileToDelete.delete();
                     }
                     catch (Exception e)
@@ -180,7 +180,7 @@ public class Manager {
         {
             Encryption encryption = new Encryption();
             ZipWork zipWork = new ZipWork();
-            File inputFile = new File( zipWork.read(file.nameInputFile+".zip"));
+            File inputFile = new File( zipWork.read(file.nameInputFile+"." + file.typeOfInputArchive));
             switch (file.typeInputFile)
             {
                 case "txt"->{

@@ -15,7 +15,6 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipWork
 {
-
     public String read(String fileName)
     {
         String unpackedFile = new String();
