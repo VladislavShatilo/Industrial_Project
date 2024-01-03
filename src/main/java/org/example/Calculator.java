@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.Stack;
 import java.util.Vector;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
     public class Calculator {
 
@@ -104,6 +106,18 @@ import java.util.Vector;
             }
             return arrayStrings;
         }
+        public Vector<String> calculateLibrary(Vector<String> strings)
+        {
+            Vector<String> result = new Vector<>();
+            for(String expStr : strings)
+            {
+                Expression exp = new ExpressionBuilder(expStr).build();
+                result.add(String.valueOf(exp.evaluate()));
+            }
+
+            return result;
+
+        }
 
         private static boolean isOperator(char operator) {
             return operator == '+' || operator == '*' || operator == '/' || operator == '-';
@@ -135,6 +149,7 @@ import java.util.Vector;
             };
 
         }
+
 
         private static boolean isMorePriority(char operator1,char operator2)
         {

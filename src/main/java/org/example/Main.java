@@ -14,11 +14,13 @@ public class Main {
         fillFileInfo.typeOutputFileChoice();
         fillFileInfo.nameOutputFile();
         fillFileInfo.encryptArchiveOutputType();
+        fillFileInfo.choseTypeOfCalculation();
 
 
 
         //fillFileInfo.isEncryptOutputFile();
         // fillFileInfo.isArchiveOutputFile();
+
         manage.callFunctionInput();
         manage.callFunctionOutput();
     }

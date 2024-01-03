@@ -111,6 +111,30 @@ public class ChooseFileInformation
 
 
     }
+    public void choseTypeOfCalculation() {
+        int chose;
+        System.out.println("What type of calculation method do you want to work with?\n" +
+                "1. Recursion\n" +
+                "2. Regex\n" +
+                "3. Library");
+
+        do {
+            chose = scan.nextInt();
+            if (chose == 1 || chose == 2 || chose == 3) {
+                correctData = true;
+            } else {
+                System.out.println("Incorrect data, please input again!");
+                correctData = false;
+            }
+        } while (!correctData);
+
+        switch (chose) {
+            case 1 -> file.typeOfCalculate = "1";
+            case 2 -> file.typeOfCalculate = "2";
+            case 3 -> file.typeOfCalculate = "3";
+            default -> throw new IllegalStateException("Unexpected value: " + chose);
+        }
+    }
 
     public void nameInputFile()
     {

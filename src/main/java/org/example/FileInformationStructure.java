@@ -8,6 +8,7 @@ package org.example;
        public boolean encryptThanArchiveInput;
 
        public boolean ArchiveThanEncryptInput;
+       public String typeOfCalculate;
 
 
         public String typeOutputFile;

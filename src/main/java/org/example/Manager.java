@@ -30,10 +30,8 @@ public class Manager {
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        Vector<String> data = txtWork.readFromPlainTextFile("enc_out.txt");
-                        result = calculator.calculateSimple(data);
+                        result = txtWork.readFromPlainTextFile("enc_out.txt");
                         outputFile.delete();
-
                     }
                     catch (Exception e)
                     {
@@ -46,8 +44,7 @@ public class Manager {
                     JSONWork jsonWork = new JSONWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        Vector<String> data = jsonWork.readFromJSON("enc_out.json");
-                        result = calculator.calculateSimple(data);
+                        result = jsonWork.readFromJSON("enc_out.json");
                         outputFile.delete();
                     }
                     catch (Exception e)
@@ -62,8 +59,7 @@ public class Manager {
                     XMLWork xmlWork = new XMLWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        Vector<String> data = xmlWork.readFromXML("enc_out.xml");
-                        result = calculator.calculateSimple(data);
+                        result = xmlWork.readFromXML("enc_out.xml");
                         outputFile.delete();
                     }
                     catch (Exception e)
@@ -85,8 +81,7 @@ public class Manager {
                 case "txt"->{
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
-                        Vector<String> data = txtWork.readFromPlainTextFile( zipWork.read(file.nameInputFile+".zip"));
-                        result = calculator.calculateSimple(data);
+                        result = txtWork.readFromPlainTextFile( zipWork.read(file.nameInputFile+".zip"));
                         File fileToDelete = new File( zipWork.read(file.nameInputFile+".zip"));
                         fileToDelete.delete();
 
@@ -99,8 +94,7 @@ public class Manager {
                 case "json"->{
                     JSONWork jsonWork = new JSONWork();
                     try {
-                        Vector<String> data = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+".zip"));
-                        result = calculator.calculateSimple(data);
+                        result = jsonWork.readFromJSON( zipWork.read(file.nameInputFile+".zip"));
                        File file1= new File( zipWork.read(file.nameInputFile+".zip"));
                        file1.delete();
 
@@ -111,8 +105,7 @@ public class Manager {
                 case "xml"->{
                     XMLWork xmlWork = new XMLWork();
                     try {
-                        Vector<String> data = xmlWork.readFromXML( zipWork.read(file.nameInputFile+".zip"));
-                        result = calculator.calculateSimple(data);
+                        result = xmlWork.readFromXML( zipWork.read(file.nameInputFile+".zip"));
                         File file1 =new File( zipWork.read(file.nameInputFile+".zip"));
                         file1.delete();
 
@@ -138,8 +131,7 @@ public class Manager {
                     PlainTextProcess plainTextProcess = new PlainTextProcess();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        Vector<String> data = plainTextProcess.readFromPlainTextFile(zipWork.read("enc_out.zip"));
-                        result = calculator.calculateSimple(data);
+                        result = plainTextProcess.readFromPlainTextFile(zipWork.read("enc_out.zip"));
                         File fileToDelete = new File( zipWork.read("enc_out.zip"));
                         fileToDelete.delete();
                     }
@@ -147,16 +139,14 @@ public class Manager {
                     {
                         System.out.println("Error decrypt file " + e);
                     }
-
-
+                    
                 }
                 case "json"->{
 
                     JSONWork jsonWork = new JSONWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        Vector<String> data = jsonWork.readFromJSON(zipWork.read("enc_out.zip"));
-                        result = calculator.calculateSimple(data);
+                        result = jsonWork.readFromJSON(zipWork.read("enc_out.zip"));
                         File fileToDelete = new File( zipWork.read("enc_out.zip"));
                         fileToDelete.delete();
                     }
@@ -170,8 +160,7 @@ public class Manager {
                     XMLWork xmlWork = new XMLWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        Vector<String> data = xmlWork.readFromXML(zipWork.read("enc_out.zip"));
-                        result = calculator.calculateSimple(data);
+                        result = xmlWork.readFromXML(zipWork.read("enc_out.zip"));
                         File fileToDelete = new File( zipWork.read("enc_out.zip"));
                         fileToDelete.delete();
                     }
@@ -200,7 +189,7 @@ public class Manager {
 
                         File outputFile = new File("enc_out.txt");
                         encryption.decryptFile(inputFile,outputFile);
-                        result = calculator.calculateSimple( txtWork.readFromPlainTextFile("enc_out.txt"));
+                        result = txtWork.readFromPlainTextFile("enc_out.txt");
                         outputFile.delete();
 
                     } catch (Exception e) {
@@ -213,7 +202,7 @@ public class Manager {
                     try {
                         File outputFile = new File("enc_out.json");
                         encryption.decryptFile(inputFile,outputFile);
-                        result = calculator.calculateSimple( jsonWork.readFromJSON("enc_out.json"));
+                        result =jsonWork.readFromJSON("enc_out.json");
                         outputFile.delete();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -225,7 +214,7 @@ public class Manager {
                     try {
                         File outputFile = new File("enc_out.xml");
                         encryption.decryptFile(inputFile,outputFile);
-                        result = calculator.calculateSimple( xmlWork.readFromXML("enc_out.xml"));
+                        result =  xmlWork.readFromXML("enc_out.xml");
                         outputFile.delete();
 
                     } catch (Exception e) {
@@ -245,8 +234,7 @@ public class Manager {
                 case "txt" -> {
                     PlainTextProcess txtWork = new PlainTextProcess();
                     try {
-                        Vector<String> data = txtWork.readFromPlainTextFile(file.nameInputFile);
-                        result = calculator.calculateSimple(data);
+                        result = txtWork.readFromPlainTextFile(file.nameInputFile);
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -255,8 +243,7 @@ public class Manager {
                 case "json" -> {
                     JSONWork jsonWork = new JSONWork();
                     try {
-                        Vector<String> data = jsonWork.readFromJSON(file.nameInputFile);
-                        result = calculator.calculateSimple(data);
+                        result = jsonWork.readFromJSON(file.nameInputFile);
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -266,9 +253,7 @@ public class Manager {
                 case "xml" -> {
                     XMLWork xmlWork = new XMLWork();
                     try {
-                        Vector<String> data = xmlWork.readFromXML(file.nameInputFile);
-                        result = calculator.calculateSimple(data);
-
+                        result = xmlWork.readFromXML(file.nameInputFile);
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -278,7 +263,23 @@ public class Manager {
             }
 
         }
+        calculate();
 
+    }
+    private void calculate(){
+        switch (file.typeOfCalculate) {
+            case "1" -> {
+                result = calculator.calculateSimple(result);
+            }
+            case "2" -> {
+                result = calculator.calculateWithRegex(result);
+
+            }
+            case "3" -> {
+                result = calculator.calculateLibrary(result);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + file.typeOfCalculate);
+        }
     }
 
     private void archiveTxt(){
