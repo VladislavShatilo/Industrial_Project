@@ -12,6 +12,7 @@ import java.security.MessageDigest;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArchiveWorkTest {
+
     private boolean areFilesEqual(Path file1, Path file2) throws IOException {
 
         byte[] file1Content = Files.readAllBytes(file1);
