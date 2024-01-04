@@ -71,10 +71,10 @@ class XMLWorkTest {
         }catch (Exception e) {
             Assertions.fail();
         }
-//        File fileToDelete1 = new File("temp.xml");
-//        File fileToDelete2 = new File("temp1.xml");
-//        fileToDelete1.delete();
-//        fileToDelete2.delete();
+       File fileToDelete1 = new File("temp.xml");
+       File fileToDelete2 = new File("temp1.xml");
+       fileToDelete1.delete();
+       fileToDelete2.delete();
 
 
     }
