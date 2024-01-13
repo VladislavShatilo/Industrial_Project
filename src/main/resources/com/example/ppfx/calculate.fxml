@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="12.0" layoutY="33.0" prefHeight="28.0" prefWidth="246.0" text="Choose type of calculation">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <VBox layoutX="14.0" layoutY="71.0" prefHeight="90.0" prefWidth="117.0">
+         <children>
+            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="321.0" text="Recursion">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Regex">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Library">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </VBox>
+      <Button layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" text="Calculate" />
+   </children>
+</Pane>
