@@ -4,9 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.ppfx.HelloController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ppfx.HelloController">
    <children>
       <Label layoutX="12.0" layoutY="33.0" prefHeight="28.0" prefWidth="246.0" text="Choose type of calculation">
          <font>
@@ -19,19 +17,25 @@
                <font>
                   <Font size="14.0" />
                </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="calculateToggleGroup" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Regex">
+            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Regex" toggleGroup="$calculateToggleGroup">
                <font>
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Library">
+            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Library" toggleGroup="$calculateToggleGroup">
                <font>
                   <Font size="14.0" />
                </font>
             </RadioButton>
          </children>
       </VBox>
-      <Button layoutX="14.0" layoutY="178.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" text="Calculate" />
+      <Button layoutX="1.0" layoutY="178.0" mnemonicParsing="false" onAction="#calculate" prefHeight="76.0" prefWidth="295.0" text="CALCULATE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font></Button>
    </children>
 </Pane>

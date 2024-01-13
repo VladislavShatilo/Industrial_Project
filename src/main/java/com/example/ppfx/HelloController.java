@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -141,6 +138,11 @@ public class HelloController {
     private ToggleGroup extensionInputToggleGroup;
 
     @FXML
+    private TextField nameInput;
+
+    @FXML
+    private TextField nameOutput;
+    @FXML
     private ToggleGroup extensionOutputToggleGroup;
 
     @FXML
@@ -151,6 +153,9 @@ public class HelloController {
 
     @FXML
     public void getData(ActionEvent actionEvent) throws IOException {
+        file.nameInputFile = nameInput.getText();
+        file.nameOutputFile = nameOutput.getText();
+
         RadioButton selectedInputType = (RadioButton) extensionInputToggleGroup.getSelectedToggle();
         file.typeInputFile = selectedInputType.getText();
 
@@ -232,7 +237,50 @@ public class HelloController {
             newCalculateWindow();
         }
 
-     
+
+
+
+    }
+
+    @FXML
+    private ToggleGroup calculateToggleGroup;
+
+    @FXML
+    public void calculate(ActionEvent actionEvent) throws IOException
+    {
+        RadioButton selectedInputType = (RadioButton) calculateToggleGroup.getSelectedToggle();
+       switch (selectedInputType.getText())
+       {
+           case "Recursion":
+           {
+               file.typeOfCalculate = "1";
+               break;
+
+           }
+           case "Regex":
+           {
+               file.typeOfCalculate = "2";
+               break;
+
+           }
+           case "Library":
+           {
+               file.typeOfCalculate = "3";
+               break;
+
+           }
+           default: {
+
+           }
+
+       }
+
+        Manager manage = new Manager(file);
+        manage.callFunctionInput();
+        manage.callFunctionOutput();
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
 
 
     }
