@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0"
+      prefWidth="247.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ppfx.HelloController">
+   <Label layoutX="2.0" prefHeight="67.0" prefWidth="247.0" text="Type of input archive" textAlignment="CENTER">
+      <font>
+         <Font name="System Bold" size="24.0"/>
+      </font>
+   </Label>
+   <Button fx:id="zipInputBut"  layoutY="52.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="123.0" text="ZIP" onAction="#zipInp">
+      <font>
+         <Font name="System Bold" size="36.0"/>
+      </font>
+   </Button>
+   <Button fx:id="rarInputBut" layoutX="123.0" layoutY="52.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="123.0" text="RAR" onAction="#rarInp">
+      <font>
+         <Font name="System Bold" size="36.0"/>
+      </font>
+   </Button>
+</Pane>
