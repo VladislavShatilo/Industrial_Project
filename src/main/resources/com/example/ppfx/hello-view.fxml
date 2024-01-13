@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="73.0" layoutY="21.0" prefHeight="35.0" prefWidth="66.0" text="Input" textAlignment="JUSTIFY">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutX="35.0" layoutY="97.0" prefHeight="89.0" prefWidth="96.0">
+         <children>
+             
+            <RadioButton mnemonicParsing="false" prefHeight="23.0" prefWidth="96.0" text=".txt">
+               <toggleGroup>
+                  <ToggleGroup fx:id="extensionToggleGroup"/>
+               </toggleGroup>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </RadioButton>
+            <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="96.0" text=".json" toggleGroup="$extensionToggleGroup">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </RadioButton>
+            <RadioButton layoutX="10.0" layoutY="63.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="96.0" text=".xml" toggleGroup="$extensionToggleGroup">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </RadioButton>
+         </children>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.ppfx.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+      </VBox>
+      <Label layoutX="14.0" layoutY="62.0" prefHeight="21.0" prefWidth="183.0" text="Choose input extension " textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
