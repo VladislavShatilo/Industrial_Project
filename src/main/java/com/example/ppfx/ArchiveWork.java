@@ -18,7 +18,6 @@ public class ArchiveWork
             {
 
                 name = entry.getName();
-
                 unpackedFile = name;
 
                 FileOutputStream fileOutputStream = new FileOutputStream(unpackedFile);
@@ -33,7 +32,8 @@ public class ArchiveWork
         }
         catch (Exception ex) {
 
-            System.out.println(ex.getMessage());
+            System.err.println("Error read from archive" + ex.getMessage());
+            System.exit(1);
         }
         return unpackedFile;
     }

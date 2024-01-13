@@ -9,16 +9,18 @@ public class Main {
 
         fillFileInfo.typeInputFileChoice();
         fillFileInfo.nameInputFile();
-
         fillFileInfo.encryptArchiveInputType();
+        fillFileInfo.choseTypeOfCalculation();
+        manage.callFunctionInput();
+
         fillFileInfo.typeOutputFileChoice();
         fillFileInfo.nameOutputFile();
         fillFileInfo.encryptArchiveOutputType();
-        fillFileInfo.choseTypeOfCalculation();
 
 
 
-        manage.callFunctionInput();
+
+
         manage.callFunctionOutput();
 
 

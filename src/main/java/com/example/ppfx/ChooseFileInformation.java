@@ -24,14 +24,15 @@ public class ChooseFileInformation
                     1. YES
                     2. NO""");
         int startWork;
-        startWork = scan.nextInt();
+
         do{
+            startWork = scan.nextInt();
             if (startWork == 1) {
 
                 correctData = true;
 
-            } else if (startWork == 0) {
-
+            } else if (startWork == 2) {
+                System.exit(0);
                 correctData = true;
             } else {
                 System.out.println("Incorrect data, please input again!\n");
@@ -79,7 +80,7 @@ public class ChooseFileInformation
     }
     public void encryptArchiveInputType()
     {
-        int chose = correctCheckArchiveEnc();
+
         System.out.println("""
                 What type of input file do you want to work with?
                 1. Just file
@@ -88,7 +89,7 @@ public class ChooseFileInformation
                 4. Encrypt -> Archive file
                 5. Archive -> Encrypt file""");
 
-
+        int chose = correctCheckArchiveEnc();
         switch (chose) {
             case 1 -> {
                 file.isArchiveInputFile = false;
@@ -158,7 +159,7 @@ public class ChooseFileInformation
 
     public void encryptArchiveOutputType()
     {
-        int chose = correctCheckArchiveEnc();
+
         System.out.println("""
                 What type of output file do you want to work with?
                 1. Just file
@@ -166,7 +167,7 @@ public class ChooseFileInformation
                 3. Archive file
                 4. Encrypt -> Archive file
                 5. Archive -> Encrypt file""");
-
+        int chose = correctCheckArchiveEnc();
         switch (chose) {
             case 1 -> {
                 file.isArchiveOutputFile = false;

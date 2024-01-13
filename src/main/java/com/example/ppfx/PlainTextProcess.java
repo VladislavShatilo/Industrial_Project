@@ -20,7 +20,8 @@ public class PlainTextProcess {
             }
             catch (IOException e)
             {
-                System.out.println("Error");
+                System.err.println("Error read from txt " + e.getMessage());
+                System.exit(1);
             }
 
         }

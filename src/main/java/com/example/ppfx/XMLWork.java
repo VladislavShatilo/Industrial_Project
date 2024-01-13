@@ -23,7 +23,8 @@ public class XMLWork {
         try {
             doc = dbf.newDocumentBuilder().parse(file);
         } catch (Exception e) {
-            System.out.println("DocumentBuilderFactory Error");
+            System.err.println("Error xml read" + e.getMessage());
+            System.exit(1);
             return null;
 
         }
