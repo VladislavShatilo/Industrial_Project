@@ -150,10 +150,26 @@ public class HelloController {
 
     @FXML
     private ToggleGroup typeOutputToggleGroup;
+    private void showErrorAlert(String title, String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
+    private void submitForm() {
+        if (nameInput.getText().isEmpty() || nameOutput.getText().isEmpty() ||extensionInputToggleGroup.getSelectedToggle() == null
+        ||extensionOutputToggleGroup.getSelectedToggle() == null || typeInputToggleGroup.getSelectedToggle() == null
+        ||typeOutputToggleGroup.getSelectedToggle() == null )
+        {
+            showErrorAlert("Error", "Required fields", "Please, fill all required fields");
+        }
+    }
 
 
     @FXML
     public void getData(ActionEvent actionEvent) throws IOException {
+        submitForm();
 
         file.nameInputFile = nameInput.getText();
         file.nameOutputFile = nameOutput.getText();
