@@ -1,8 +1,5 @@
 package com.example.ppfx;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
@@ -10,7 +7,6 @@ import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -35,7 +31,7 @@ class XMLWorkTest {
     XMLWork xmlWork = new XMLWork();
     @Test
     void test1() {
-        Vector<String> expressions = new Vector<>();
+        Vector<String> expressions;
         expressions = xmlWork.readFromXML("i.xml");
         Vector<String> expected = new Vector<>();
         expected.add("4 + 3 * 4");
@@ -75,7 +71,6 @@ class XMLWorkTest {
 
     }
     private void writeInXml() throws Exception {
-        JSONObject elem = new JSONObject();
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = dbf.newDocumentBuilder();

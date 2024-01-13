@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Vector;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class LibraryCalculatorBuilderTest {
     LibraryCalculatorBuilder libraryCalculatorBuilder = LibraryCalculatorBuilder.getInstance();
     @Test

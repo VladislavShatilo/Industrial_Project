@@ -1,15 +1,11 @@
 package com.example.ppfx;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -28,7 +24,7 @@ class PlainTextProcessTest {
     PlainTextProcess plainTextProcess = new PlainTextProcess();
     @Test
     void test1() {
-        Vector<String> expressions = new Vector<>();
+        Vector<String> expressions;
         expressions = plainTextProcess.readFromPlainTextFile("i.txt");
         Vector<String> expected = new Vector<>();
         expected.add("4 + 3 * 4;");

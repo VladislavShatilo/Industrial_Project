@@ -28,7 +28,7 @@ class JSONWorkTest {
     JSONWork jsonWork = new JSONWork();
     @Test
     void test1() {
-        Vector<String> expressions = new Vector<>();
+        Vector<String> expressions;
         expressions = jsonWork.readFromJSON("i.json");
         Vector<String> expected = new Vector<>();
         expected.add("4 + 3 * 4");
@@ -73,8 +73,8 @@ class JSONWorkTest {
 
         try (PrintWriter out = new PrintWriter(new FileWriter("temp1.json"))){
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            elem.put(("Answer 0" ),Double.valueOf((double) 16).toString());
-            elem.put(("Answer 1" ),Double.valueOf((double) -2).toString());
+            elem.put(("Answer 0" ),Double.valueOf( 16).toString());
+            elem.put(("Answer 1" ),Double.valueOf( -2).toString());
             elem.put(("Answer 2" ), Double.valueOf((double) -4 /3).toString());
 
             String jsonString = gson.toJson(elem);

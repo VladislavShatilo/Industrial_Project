@@ -40,7 +40,7 @@ public class RegexCalculatorBuilder implements CalculatorBuilderInterface{
                         values.push(CalculatorBuilderInterface.calculateSimpleExp(operators.pop(), values.pop(), values.pop()));
                     }
                     operators.pop();
-                } else if (CalculatorBuilderInterface.isOperator(characters[j])) {
+                } else if (ch.matches("[+\\-*/]")) {
                     while (!operators.empty() && CalculatorBuilderInterface.isMorePriority((characters[j]), operators.peek())) {
                         values.push(CalculatorBuilderInterface.calculateSimpleExp(operators.pop(), values.pop(), values.pop()));
                     }

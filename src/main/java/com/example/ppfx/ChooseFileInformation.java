@@ -62,16 +62,9 @@ public class ChooseFileInformation
 
 
     }
-    public void encryptArchiveInputType()
+    private int correctCheckArchiveEnc( )
     {
         int chose;
-        System.out.println("""
-                What type of input file do you want to work with?
-                1. Just file
-                2. Encrypt file
-                3. Archive file
-                4. Encrypt -> Archive file
-                5. Archive -> Encrypt file""");
         do {
             chose= scan.nextInt();
             if (chose == 1 || chose == 2 || chose == 3 || chose == 4 || chose ==5) {
@@ -82,6 +75,19 @@ public class ChooseFileInformation
                 correctData = false;
             }
         }while(!correctData);
+        return chose;
+    }
+    public void encryptArchiveInputType()
+    {
+        int chose = correctCheckArchiveEnc();
+        System.out.println("""
+                What type of input file do you want to work with?
+                1. Just file
+                2. Encrypt file
+                3. Archive file
+                4. Encrypt -> Archive file
+                5. Archive -> Encrypt file""");
+
 
         switch (chose) {
             case 1 -> {
@@ -152,7 +158,7 @@ public class ChooseFileInformation
 
     public void encryptArchiveOutputType()
     {
-        int chose;
+        int chose = correctCheckArchiveEnc();
         System.out.println("""
                 What type of output file do you want to work with?
                 1. Just file
@@ -160,16 +166,6 @@ public class ChooseFileInformation
                 3. Archive file
                 4. Encrypt -> Archive file
                 5. Archive -> Encrypt file""");
-        do {
-            chose= scan.nextInt();
-            if (chose == 1 || chose == 2 || chose == 3 || chose == 4 || chose ==5) {
-                correctData = true;
-            }
-            else {
-                System.out.println("Incorrect data, please input again!");
-                correctData = false;
-            }
-        }while(!correctData);
 
         switch (chose) {
             case 1 -> {
@@ -236,23 +232,30 @@ public class ChooseFileInformation
         file.nameOutputFile = scan.next() ;
 
     }
+    private int correctCheckArchive()
+    {
+        int chose;
+        do {
+            chose= scan.nextInt();
+            if (chose == 1 || chose == 2) {
+                correctData = true;
+            }
+            else {
+                System.out.println("Incorrect data, please input again!");
+                correctData = false;
+            }
+        }while(!correctData);
+        return chose;
+
+    }
      private void chooseInputArchive()
      {
          System.out.println("""
                  Choose type of archive
                  1 .zip
                  2. .rar""");
-         int chose;
-         do {
-             chose= scan.nextInt();
-             if (chose == 1 || chose == 2) {
-                 correctData = true;
-             }
-             else {
-                 System.out.println("Incorrect data, please input again!");
-                 correctData = false;
-             }
-         }while(!correctData);
+         int chose = correctCheckArchive();
+
 
          switch (chose) {
              case 1 -> file.typeOfInputArchive = "zip";
@@ -268,17 +271,7 @@ public class ChooseFileInformation
                  Choose type of output archive
                  1 .zip
                  2. .rar""");
-        int chose;
-        do {
-            chose= scan.nextInt();
-            if (chose == 1 || chose == 2) {
-                correctData = true;
-            }
-            else {
-                System.out.println("Incorrect data, please input again!");
-                correctData = false;
-            }
-        }while(!correctData);
+        int chose = correctCheckArchive();
 
         switch (chose) {
             case 1 -> file.typeOfOutputArchive = "zip";
