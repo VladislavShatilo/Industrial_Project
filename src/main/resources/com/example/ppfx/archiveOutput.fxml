@@ -4,8 +4,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import java.net.URL?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0" prefWidth="247.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ppfx.HelloController">
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
    <children>
       <Label layoutX="2.0" prefHeight="67.0" prefWidth="247.0" text="Type of output archive" textAlignment="CENTER">
          <font>

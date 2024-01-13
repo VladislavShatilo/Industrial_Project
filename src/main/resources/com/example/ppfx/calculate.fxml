@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ppfx.HelloController">
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
    <children>
-      <Label layoutX="12.0" layoutY="33.0" prefHeight="28.0" prefWidth="246.0" text="Choose type of calculation">
+      <Label layoutX="3.0" layoutY="3.0" prefHeight="58.0" prefWidth="288.0" text="   Choose type of calculation" textAlignment="CENTER">
+
          <font>
-            <Font name="System Bold" size="19.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <VBox layoutX="14.0" layoutY="71.0" prefHeight="90.0" prefWidth="117.0">
