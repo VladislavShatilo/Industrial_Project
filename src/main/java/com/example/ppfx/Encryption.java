@@ -1,5 +1,7 @@
 package com.example.ppfx;
 
+import javafx.scene.control.Alert;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -17,6 +19,13 @@ public class Encryption {
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES";
     private static final  String key = "ThisIsASecretKey";
+    private static void showErrorAlert(String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error encryption-decryption");
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
 
     public void encryptFile(File inputFile, File outputFile)
             throws CryptoException {
@@ -52,6 +61,7 @@ public class Encryption {
                  | InvalidKeyException | BadPaddingException
                  | IllegalBlockSizeException | IOException ex) {
            System.err.println("Error encryption-decryption" + ex.getMessage());
+           showErrorAlert(ex.getMessage());
            System.exit(1);
         }
     }

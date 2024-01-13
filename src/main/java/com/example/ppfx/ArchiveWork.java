@@ -1,5 +1,7 @@
 package com.example.ppfx;
 
+import javafx.scene.control.Alert;
+
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -7,6 +9,13 @@ import java.util.zip.ZipOutputStream;
 
 public class ArchiveWork
 {
+    private void showErrorAlert(String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error read from archive");
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
     public String read(String fileName)
     {
         String unpackedFile = "";
@@ -33,6 +42,7 @@ public class ArchiveWork
         catch (Exception ex) {
 
             System.err.println("Error read from archive" + ex.getMessage());
+            showErrorAlert(ex.getMessage());
             System.exit(1);
         }
         return unpackedFile;

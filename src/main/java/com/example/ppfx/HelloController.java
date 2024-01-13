@@ -151,8 +151,10 @@ public class HelloController {
     @FXML
     private ToggleGroup typeOutputToggleGroup;
 
+
     @FXML
     public void getData(ActionEvent actionEvent) throws IOException {
+
         file.nameInputFile = nameInput.getText();
         file.nameOutputFile = nameOutput.getText();
 
@@ -248,38 +250,31 @@ public class HelloController {
     @FXML
     public void calculate(ActionEvent actionEvent) throws IOException
     {
+        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+
         RadioButton selectedInputType = (RadioButton) calculateToggleGroup.getSelectedToggle();
-       switch (selectedInputType.getText())
-       {
-           case "Recursion":
-           {
-               file.typeOfCalculate = "1";
-               break;
+        switch (selectedInputType.getText()) {
+            case "Recursion" -> {
+                file.typeOfCalculate = "1";
 
-           }
-           case "Regex":
-           {
-               file.typeOfCalculate = "2";
-               break;
+            }
+            case "Regex" -> {
+                file.typeOfCalculate = "2";
 
-           }
-           case "Library":
-           {
-               file.typeOfCalculate = "3";
-               break;
+            }
+            case "Library" -> {
+                file.typeOfCalculate = "3";
 
-           }
-           default: {
+            }
+            default -> {
 
-           }
-
-       }
+            }
+        }
 
         Manager manage = new Manager(file);
         manage.callFunctionInput();
         manage.callFunctionOutput();
-        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        currentStage.close();
 
 
 

@@ -1,5 +1,6 @@
 package com.example.ppfx;
 
+import javafx.scene.control.Alert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -14,6 +15,14 @@ import java.io.File;
 import java.util.Vector;
 
 public class XMLWork {
+    private void showErrorAlert(String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error read from xml");
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
+
     public Vector<String> readFromXML(String fileName) {
         Vector<String> data = new Vector<>();
         String expString;
@@ -24,6 +33,7 @@ public class XMLWork {
             doc = dbf.newDocumentBuilder().parse(file);
         } catch (Exception e) {
             System.err.println("Error xml read" + e.getMessage());
+            showErrorAlert(e.getMessage());
             System.exit(1);
             return null;
 

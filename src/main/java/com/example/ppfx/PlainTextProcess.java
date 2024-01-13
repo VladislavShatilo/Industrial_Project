@@ -1,5 +1,7 @@
 package com.example.ppfx;
 
+import javafx.scene.control.Alert;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,6 +11,13 @@ import java.util.Vector;
 public class PlainTextProcess {
 
     private final Vector<String> data  = new Vector<>();
+    private void showErrorAlert(String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error read from txt");
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
 
     public Vector<String> readFromPlainTextFile(String fileName)  {
         {
@@ -21,6 +30,7 @@ public class PlainTextProcess {
             catch (IOException e)
             {
                 System.err.println("Error read from txt " + e.getMessage());
+                showErrorAlert(e.getMessage());
                 System.exit(1);
             }
 

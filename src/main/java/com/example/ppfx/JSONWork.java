@@ -2,6 +2,7 @@ package com.example.ppfx;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.scene.control.Alert;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,6 +13,13 @@ import java.io.PrintWriter;
 import java.util.Vector;
 
 public  class JSONWork {
+    private void showErrorAlert(String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error read from json");
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
         public Vector<String> readFromJSON(String fileName) {
             JSONParser parser = new JSONParser();
             Vector<String> data = new Vector<>();
@@ -28,6 +36,7 @@ public  class JSONWork {
 
             } catch (Exception e) {
                 System.err.println("Error read from json" + e.getMessage());
+                showErrorAlert( e.getMessage());
                 System.exit(1);
             }
             return data;
