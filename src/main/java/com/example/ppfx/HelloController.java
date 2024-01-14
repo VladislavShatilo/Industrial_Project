@@ -1,8 +1,5 @@
 package com.example.ppfx;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -72,10 +66,6 @@ public class HelloController {
         Stage secondStage = new Stage();
         secondStage.setTitle("Loading Screen");
 
-
-        LoadingController loadingScreenController = loader.getController();
-
-
         Scene scene = new Scene(root);
         secondStage.setScene(scene);
 
@@ -102,7 +92,7 @@ public class HelloController {
                 currentStage.close();
             } catch (Exception e) {
 
-                System.out.println("Error new window" + e.toString());
+                System.out.println("Error new window" + e.getMessage());
             }
 
     }
@@ -124,7 +114,7 @@ public class HelloController {
         }
         catch (Exception e) {
 
-            System.out.println("Error new window" + e.toString());
+            System.out.println("Error new window" + e.getMessage());
         }
     }
 
@@ -139,7 +129,7 @@ public class HelloController {
         }
         catch (Exception e) {
 
-            System.out.println("Error new window" + e.toString());
+            System.out.println("Error new window" + e.getMessage());
         }
     }
 
@@ -154,7 +144,7 @@ public class HelloController {
         }
         catch (Exception e) {
 
-            System.out.println("Error new window" + e.toString());
+            System.out.println("Error new window" + e.getMessage());
         }
 
     }
@@ -175,11 +165,11 @@ public class HelloController {
 
     @FXML
     private ToggleGroup typeOutputToggleGroup;
-    private void showErrorAlert(String title, String headerText, String contentText) {
+    private void showErrorAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
+        alert.setTitle("Error");
+        alert.setHeaderText("Required fields");
+        alert.setContentText("Please, fill all required fields");
         alert.showAndWait();
     }
     private void submitForm() {
@@ -187,7 +177,7 @@ public class HelloController {
         ||extensionOutputToggleGroup.getSelectedToggle() == null || typeInputToggleGroup.getSelectedToggle() == null
         ||typeOutputToggleGroup.getSelectedToggle() == null )
         {
-            showErrorAlert("Error", "Required fields", "Please, fill all required fields");
+            showErrorAlert();
         }
     }
 
@@ -281,18 +271,10 @@ public class HelloController {
         }
 
 
-
-
     }
-
-
 
     @FXML
     private ToggleGroup calculateToggleGroup;
-    @FXML
-    private void openLoadingScreen() {
-
-    }
 
     @FXML
     public void calculate(ActionEvent actionEvent) throws IOException
@@ -305,18 +287,15 @@ public class HelloController {
 
         RadioButton selectedInputType = (RadioButton) calculateToggleGroup.getSelectedToggle();
         switch (selectedInputType.getText()) {
-            case "Recursion" -> {
+            case "Recursion" ->
                 file.typeOfCalculate = "1";
 
-            }
-            case "Regex" -> {
+            case "Regex" ->
                 file.typeOfCalculate = "2";
 
-            }
-            case "Library" -> {
+            case "Library" ->
                 file.typeOfCalculate = "3";
 
-            }
             default -> {
 
             }

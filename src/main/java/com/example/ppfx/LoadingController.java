@@ -9,7 +9,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.concurrent.TimeUnit;
 
 public class LoadingController {
 

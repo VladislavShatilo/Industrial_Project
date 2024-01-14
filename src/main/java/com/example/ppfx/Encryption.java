@@ -27,20 +27,16 @@ public class Encryption {
         alert.showAndWait();
     }
 
-    public void encryptFile(File inputFile, File outputFile)
-            throws CryptoException {
+    public void encryptFile(File inputFile, File outputFile) {
         doCrypto(Cipher.ENCRYPT_MODE, inputFile, outputFile);
 
     }
 
-    public  void  decryptFile( File inputFile, File outputFile)
-            throws CryptoException {
+    public  void  decryptFile( File inputFile, File outputFile) {
         doCrypto(Cipher.DECRYPT_MODE, inputFile, outputFile);
-
     }
 
-    private static void doCrypto(int cipherMode, File inputFile, File outputFile)
-            throws CryptoException {
+    private static void doCrypto(int cipherMode, File inputFile, File outputFile) {
         try {
             Key secretKey = new SecretKeySpec(Encryption.key.getBytes(), ALGORITHM);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);

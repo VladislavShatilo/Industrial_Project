@@ -5,42 +5,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ppfx.HelloController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0"
+      prefWidth="295.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.ppfx.HelloController">
    <stylesheets>
-      <URL value="@styles.css" />
+      <URL value="@styles.css"/>
    </stylesheets>
-   <children>
-      <Label layoutX="3.0" layoutY="3.0" prefHeight="58.0" prefWidth="288.0" text="   Choose type of calculation" textAlignment="CENTER">
+   <Label layoutX="3.0" layoutY="3.0" prefHeight="58.0" prefWidth="288.0" text="   Choose type of calculation"
+          textAlignment="CENTER">
 
+      <font>
+         <Font name="System Bold" size="20.0"/>
+      </font>
+   </Label>
+   <VBox layoutX="14.0" layoutY="71.0" prefHeight="90.0" prefWidth="117.0">
+      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="321.0" text="Recursion">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font size="14.0"/>
          </font>
-      </Label>
-      <VBox layoutX="14.0" layoutY="71.0" prefHeight="90.0" prefWidth="117.0">
-         <children>
-            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="321.0" text="Recursion">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <toggleGroup>
-                  <ToggleGroup fx:id="calculateToggleGroup" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Regex" toggleGroup="$calculateToggleGroup">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Library" toggleGroup="$calculateToggleGroup">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </RadioButton>
-         </children>
-      </VBox>
-      <Button layoutX="1.0" layoutY="178.0" mnemonicParsing="false" onAction="#calculate" prefHeight="76.0" prefWidth="295.0" text="CALCULATE">
+         <toggleGroup>
+            <ToggleGroup fx:id="calculateToggleGroup"/>
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Regex"
+                   toggleGroup="$calculateToggleGroup">
          <font>
-            <Font name="System Bold" size="36.0" />
-         </font></Button>
-   </children>
+            <Font size="14.0"/>
+         </font>
+      </RadioButton>
+      <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="335.0" text="Library"
+                   toggleGroup="$calculateToggleGroup">
+         <font>
+            <Font size="14.0"/>
+         </font>
+      </RadioButton>
+   </VBox>
+   <Button layoutX="1.0" layoutY="178.0" mnemonicParsing="false" onAction="#calculate" prefHeight="76.0"
+           prefWidth="295.0" text="CALCULATE">
+      <font>
+         <Font name="System Bold" size="36.0"/>
+      </font>
+   </Button>
 </Pane>
