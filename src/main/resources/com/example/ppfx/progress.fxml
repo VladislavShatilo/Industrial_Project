@@ -14,4 +14,5 @@
       <font>
          <Font size="19.0" />
       </font></Label>
+   <Button fx:id="okButton" layoutX="172.0" layoutY="72.0" mnemonicParsing="false" onAction="#okExit" prefHeight="40.0" prefWidth="63.0" text="OK" />
 </Pane>

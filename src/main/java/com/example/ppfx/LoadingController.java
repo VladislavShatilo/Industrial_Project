@@ -4,9 +4,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
@@ -17,8 +17,15 @@ public class LoadingController {
 
     @FXML
     private Label statusLabel;
+    @FXML
+    private Button okButton;
+    @FXML
+    public void okExit(){
+       System.exit(0);
+    }
 
     public void initialize() {
+        okButton.setVisible(false);
 
         simulateLoading();
     }
@@ -33,17 +40,17 @@ public class LoadingController {
 
 
         timeline.setOnFinished(event -> {
-            statusLabel.setText("Loading complete");
-            closeLoadingScreen();
+            statusLabel.setText("FILE IS DONE");
+            progressBar.setVisible(false);
+            okButton.setVisible(true);
+
+
         });
 
 
         timeline.play();
     }
 
-    private void closeLoadingScreen() {
 
-        Stage stage = (Stage) progressBar.getScene().getWindow();
-        stage.close();
-    }
+
 }
