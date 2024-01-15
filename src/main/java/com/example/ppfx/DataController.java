@@ -276,7 +276,7 @@ public class DataController {
                 Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 currentStage.close();
                 Manager manage = new Manager(file);
-                manage.callFunctionInput();
+
 
                 RadioButton selectedInputType = (RadioButton) calculateToggleGroup.getSelectedToggle();
                 switch (selectedInputType.getText()) {
@@ -291,6 +291,7 @@ public class DataController {
                     }
                 }
 
+                manage.callFunctionInput();
 
                 manage.callFunctionOutput();
 

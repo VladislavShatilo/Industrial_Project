@@ -34,6 +34,7 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
+                        outputFile.delete();
                         System.out.println("Error decrypt file " + e);
                         System.exit(1);
                     }
@@ -49,6 +50,7 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
+                        outputFile.delete();
                         System.out.println("Error decrypt file " + e);
                         System.exit(1);
                     }
@@ -65,6 +67,7 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
+                        outputFile.delete();
                         System.out.println("Error decrypt file " + e);
                         System.exit(1);
                     }
@@ -165,7 +168,6 @@ public class Manager {
                         encryption.decryptFile(inputFile,outputFile);
                         result = jsonWork.readFromJSON(archiveWork.read("enc_out." + file.typeOfInputArchive));
                         File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
-                        System.exit(1);
                         fileToDelete.delete();
                     }
                     catch (Exception e)
@@ -300,6 +302,11 @@ public class Manager {
             }
 
         }
+        if(result.isEmpty())
+        {
+            System.err.println("empty");
+            System.exit(1);
+        }
         calculate();
 
     }
@@ -387,7 +394,7 @@ public class Manager {
     }
 
     public void callFunctionOutput() {
-        if(result != null) {
+        if(!result.isEmpty()) {
 
 
             if (file.isEncryptOutputFile && !file.isArchiveOutputFile) {
@@ -463,7 +470,7 @@ public class Manager {
                     case "txt" -> {
                         TXTWork txtWork = new TXTWork();
                         txtWork.writeInPlainText(result, file.nameOutputFile);
-                    }
+                 }
                     case "json" -> {
                         JSONWork jsonWork = new JSONWork();
                         jsonWork.writeInJSON(result, file.nameOutputFile);
