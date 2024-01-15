@@ -43,7 +43,7 @@ public class ArchiveWork
 
             System.err.println("Error read from archive" + ex.getMessage());
             showErrorAlert(ex.getMessage());
-            System.exit(1);
+           // System.exit(1);
         }
         return unpackedFile;
     }

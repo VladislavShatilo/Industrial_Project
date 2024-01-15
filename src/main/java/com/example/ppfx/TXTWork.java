@@ -20,21 +20,32 @@ public class TXTWork {
     }
 
     public Vector<String> readFromPlainTextFile(String fileName)  {
-        {
+        if(fileName.endsWith(".txt")) {
+
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     data.add(line);
                 }
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 System.err.println("Error read from txt " + e.getMessage());
                 showErrorAlert(e.getMessage());
-                System.exit(1);
+                //System.exit(1);
             }
+        }
+        else {
+
+            System.err.println("txt error");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("txt error ");
+            alert.setContentText("Error");
+            alert.showAndWait();
+            System.exit(1);
 
         }
+
+
         return data;
     }
 
@@ -44,8 +55,6 @@ public class TXTWork {
             for (String string : result) {
                 output.write(string+ "\n");
             }
-
-
         }
         catch (IOException e)
         {

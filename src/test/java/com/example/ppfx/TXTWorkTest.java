@@ -27,10 +27,10 @@ class TXTWorkTest {
         Vector<String> expressions;
         expressions = TXTWork.readFromPlainTextFile("i.txt");
         Vector<String> expected = new Vector<>();
-        expected.add("4 + 3 * 4;");
-        expected.add("3 + 2 - 7;");
-        expected.add("4 * (5 - 6) / 3;");
-        expected.add("0.56 + 0.2 * 4;");
+        expected.add("4 + 3 * 4");
+        expected.add("3 + 2 - 7");
+        expected.add("4 * (5 - 6) / 3");
+        expected.add("0.56 + 0.2 * 4");
         Assertions.assertEquals(expressions,expected);
     }
 

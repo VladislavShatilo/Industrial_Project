@@ -31,7 +31,7 @@ public class LoadingController {
     }
 
     private void simulateLoading() {
-        double durationInSeconds = 2.0;
+        double durationInSeconds = 0.7;
 
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(progressBar.progressProperty(), 0)),

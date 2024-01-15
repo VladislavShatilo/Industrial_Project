@@ -35,6 +35,7 @@ public class Manager {
                     catch (Exception e)
                     {
                         System.out.println("Error decrypt file " + e);
+                        System.exit(1);
                     }
 
                 }
@@ -49,6 +50,7 @@ public class Manager {
                     catch (Exception e)
                     {
                         System.out.println("Error decrypt file " + e);
+                        System.exit(1);
                     }
 
                 }
@@ -64,6 +66,7 @@ public class Manager {
                     catch (Exception e)
                     {
                         System.out.println("Error decrypt file " + e);
+                        System.exit(1);
                     }
 
                 }
@@ -80,12 +83,17 @@ public class Manager {
                 case "txt"->{
                     TXTWork txtWork = new TXTWork();
                     try {
+
                         result = txtWork.readFromPlainTextFile( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                         File fileToDelete = new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                         fileToDelete.delete();
 
                     } catch (Exception e) {
+                        File fileToDelete = new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        fileToDelete.delete();
+                        System.exit(1);
                         throw new RuntimeException(e);
+
                     }
 
 
@@ -98,6 +106,9 @@ public class Manager {
                        file1.delete();
 
                     } catch (Exception e) {
+                        File file1= new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        file1.delete();
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
                 }
@@ -109,6 +120,9 @@ public class Manager {
                         file1.delete();
 
                     } catch (Exception e) {
+                        File file1 =new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
+                        file1.delete();
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
 
@@ -136,7 +150,11 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
+                        File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        fileToDelete.delete();
+
                         System.out.println("Error decrypt file " + e);
+                        System.exit(1);
                     }
                     
                 }
@@ -147,11 +165,16 @@ public class Manager {
                         encryption.decryptFile(inputFile,outputFile);
                         result = jsonWork.readFromJSON(archiveWork.read("enc_out." + file.typeOfInputArchive));
                         File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        System.exit(1);
                         fileToDelete.delete();
                     }
                     catch (Exception e)
                     {
+                        File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        fileToDelete.delete();
+
                         System.out.println("Error decrypt file " + e);
+                        System.exit(1);
                     }
 
                 }
@@ -165,7 +188,10 @@ public class Manager {
                     }
                     catch (Exception e)
                     {
+                        File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        fileToDelete.delete();
                         System.out.println("Error decrypt file " + e);
+                        System.exit(1);
                     }
 
                 }
@@ -192,6 +218,9 @@ public class Manager {
                         outputFile.delete();
 
                     } catch (Exception e) {
+                        File outputFile = new File("enc_out.txt");
+                        outputFile.delete();
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
 
@@ -204,6 +233,9 @@ public class Manager {
                         result =jsonWork.readFromJSON("enc_out.json");
                         outputFile.delete();
                     } catch (Exception e) {
+                        File outputFile = new File("enc_out.json");
+                        outputFile.delete();
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
 
@@ -217,6 +249,9 @@ public class Manager {
                         outputFile.delete();
 
                     } catch (Exception e) {
+                        File outputFile = new File("enc_out.xml");
+                        outputFile.delete();
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
                 }
@@ -236,6 +271,7 @@ public class Manager {
                         result = txtWork.readFromPlainTextFile(file.nameInputFile);
 
                     } catch (Exception e) {
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
                 }
@@ -245,6 +281,7 @@ public class Manager {
                         result = jsonWork.readFromJSON(file.nameInputFile);
 
                     } catch (Exception e) {
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
 
@@ -255,6 +292,7 @@ public class Manager {
                         result = xmlWork.readFromXML(file.nameInputFile);
 
                     } catch (Exception e) {
+                        System.exit(1);
                         throw new RuntimeException(e);
                     }
 
@@ -319,7 +357,7 @@ public class Manager {
     }
     private void encArch() {
         Encryption encryption = new Encryption();
-        File inputFile = new File(file.nameOutputFile +".zip");
+        File inputFile = new File(file.nameOutputFile +"." + file.typeOfOutputArchive);
         File outputFile = new File(file.nameOutputFile + ".enc");
         try {
             encryption.encryptFile(inputFile, outputFile);
@@ -349,101 +387,95 @@ public class Manager {
     }
 
     public void callFunctionOutput() {
+        if(result != null) {
 
 
-        if(file.isEncryptOutputFile && !file.isArchiveOutputFile)
-        {
+            if (file.isEncryptOutputFile && !file.isArchiveOutputFile) {
 
-            switch (file.typeOutputFile) {
-                case "txt" -> {
-                    TXTWork TXTWork = new TXTWork();
-                    TXTWork.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
-                    enc();
+                switch (file.typeOutputFile) {
+                    case "txt" -> {
+                        TXTWork TXTWork = new TXTWork();
+                        TXTWork.writeInPlainText(result, file.nameOutputFile + file.typeOutputFile);
+                        enc();
+                    }
+                    case "json" -> {
+                        JSONWork jsonWork = new JSONWork();
+                        jsonWork.writeInJSON(result, file.nameOutputFile + file.typeOutputFile);
+                        enc();
+                    }
+                    case "xml" -> {
+                        XMLWork xmlWork = new XMLWork();
+                        xmlWork.writeInXml(result, file.nameOutputFile + file.typeOutputFile);
+                        enc();
+                    }
                 }
-                case "json" -> {
-                    JSONWork jsonWork = new JSONWork();
-                    jsonWork.writeInJSON(result, file.nameOutputFile + file.typeOutputFile);
-                    enc();
+            } else if (!file.isEncryptOutputFile && file.isArchiveOutputFile) {
+
+                switch (file.typeOutputFile) {
+                    case "txt" -> archiveTxt();
+                    case "json" -> archiveJson();
+                    case "xml" -> archiveXml();
+                    default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
                 }
-                case "xml" -> {
-                    XMLWork xmlWork = new XMLWork();
-                    xmlWork.writeInXml(result,file.nameOutputFile + file.typeOutputFile);
-                    enc();
+
+            } else if (file.isEncryptOutputFile && file.ArchiveThanEncryptOutput) {
+
+                switch (file.typeOutputFile) {
+                    case "txt" -> {
+                        archiveTxt();
+                        encArch();
+                    }
+                    case "json" -> {
+                        archiveJson();
+                        encArch();
+                    }
+                    case "xml" -> {
+                        archiveXml();
+                        encArch();
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
+                }
+            } else if (file.isEncryptOutputFile && file.encryptThanArchiveOutput) {
+                switch (file.typeOutputFile) {
+                    case "txt" -> {
+                        TXTWork TXTWork = new TXTWork();
+                        TXTWork.writeInPlainText(result, file.nameOutputFile + file.typeOutputFile);
+                        archEnc();
+
+                    }
+                    case "json" -> {
+                        JSONWork jsonWork = new JSONWork();
+                        jsonWork.writeInJSON(result, file.nameOutputFile + file.typeOutputFile);
+                        archEnc();
+                    }
+                    case "xml" -> {
+                        XMLWork xmlWork = new XMLWork();
+                        xmlWork.writeInXml(result, file.nameOutputFile + file.typeOutputFile);
+                        archEnc();
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
+                }
+
+
+            } else {
+                file.nameOutputFile += "." + file.typeOutputFile;
+                switch (file.typeOutputFile) {
+                    case "txt" -> {
+                        TXTWork txtWork = new TXTWork();
+                        txtWork.writeInPlainText(result, file.nameOutputFile);
+                    }
+                    case "json" -> {
+                        JSONWork jsonWork = new JSONWork();
+                        jsonWork.writeInJSON(result, file.nameOutputFile);
+                    }
+                    case "xml" -> {
+                        XMLWork xmlWork = new XMLWork();
+                        xmlWork.writeInXml(result, file.nameOutputFile);
+                    }
                 }
             }
         }
 
-        else if(!file.isEncryptOutputFile && file.isArchiveOutputFile)
-        {
-
-            switch (file.typeOutputFile) {
-                case "txt" -> archiveTxt();
-                case "json" -> archiveJson();
-                case "xml" -> archiveXml();
-                default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
-            }
-
-        }
-        else if(file.isEncryptOutputFile  && file.ArchiveThanEncryptOutput)
-        {
-
-            switch (file.typeOutputFile) {
-                case "txt" -> {
-                    archiveTxt();
-                    encArch();
-                }
-                case "json" -> {
-                    archiveJson();
-                    encArch();
-                }
-                case "xml" -> {
-                    archiveXml();
-                    encArch();
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
-            }
-        }
-        else if(file.isEncryptOutputFile && file.encryptThanArchiveOutput)
-        {
-            switch (file.typeOutputFile) {
-                case "txt" -> {
-                    TXTWork TXTWork = new TXTWork();
-                    TXTWork.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
-                    archEnc();
-
-                }
-                case "json" -> {
-                    JSONWork jsonWork = new JSONWork();
-                    jsonWork.writeInJSON(result, file.nameOutputFile + file.typeOutputFile);
-                    archEnc();
-                }
-                case "xml" -> {
-                    XMLWork xmlWork = new XMLWork();
-                    xmlWork.writeInXml(result,file.nameOutputFile + file.typeOutputFile);
-                    archEnc();
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + file.typeOutputFile);
-            }
-
-
-        }
-        else {
-            file.nameOutputFile += "." + file.typeOutputFile;
-            switch (file.typeOutputFile) {
-                case "txt" -> {
-                    TXTWork txtWork = new TXTWork();
-                    txtWork.writeInPlainText(result, file.nameOutputFile);
-                }
-                case "json" -> {
-                    JSONWork jsonWork = new JSONWork();
-                    jsonWork.writeInJSON(result, file.nameOutputFile);
-                }
-                case "xml" -> {
-                    XMLWork xmlWork = new XMLWork();
-                    xmlWork.writeInXml(result, file.nameOutputFile);
-                }
-            }
-        }
     }
 
 }

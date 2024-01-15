@@ -58,7 +58,7 @@ public class Encryption {
                  | IllegalBlockSizeException | IOException ex) {
            System.err.println("Error encryption-decryption" + ex.getMessage());
            showErrorAlert(ex.getMessage());
-           System.exit(1);
+           //System.exit(1);
         }
     }
 

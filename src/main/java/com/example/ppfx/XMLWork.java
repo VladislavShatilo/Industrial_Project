@@ -34,7 +34,7 @@ public class XMLWork {
         } catch (Exception e) {
             System.err.println("Error xml read" + e.getMessage());
             showErrorAlert(e.getMessage());
-            System.exit(1);
+           // System.exit(1);
             return null;
 
         }

@@ -35,6 +35,7 @@ public class DataController {
     @FXML
     private ToggleGroup calculateToggleGroup;
 
+
     @FXML
     private void newArchiveInpWindow() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("archiveInput.fxml"));
@@ -94,75 +95,63 @@ public class DataController {
     }
 
 
-
     @FXML
-    public void zipInp(ActionEvent actionEvent)
-    {
+    public void zipInp(ActionEvent actionEvent) {
         file.typeOfInputArchive = "zip";
 
-            try {
-                if(file.isArchiveOutputFile)
-                {
-                    newArchiveOutWindow();
-                }
-                else{
-                    newCalculateWindow();
-                }
-                Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                currentStage.close();
-            } catch (Exception e) {
-
-                System.out.println("Error new window" + e.getMessage());
-            }
-
-    }
-
-    @FXML
-    public void rarInp(ActionEvent actionEvent)
-    {
-        file.typeOfInputArchive = "rar";
         try {
-            if(file.isArchiveOutputFile)
-            {
+            if (file.isArchiveOutputFile) {
                 newArchiveOutWindow();
-            }
-            else{
+            } else {
                 newCalculateWindow();
             }
             Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             currentStage.close();
+        } catch (Exception e) {
+
+            System.out.println("Error new window" + e.getMessage());
         }
-        catch (Exception e) {
+
+    }
+
+    @FXML
+    public void rarInp(ActionEvent actionEvent) {
+        file.typeOfInputArchive = "rar";
+        try {
+            if (file.isArchiveOutputFile) {
+                newArchiveOutWindow();
+            } else {
+                newCalculateWindow();
+            }
+            Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
 
             System.out.println("Error new window" + e.getMessage());
         }
     }
 
     @FXML
-    public void zipOut(ActionEvent actionEvent)
-    {
+    public void zipOut(ActionEvent actionEvent) {
         file.typeOfOutputArchive = "zip";
         try {
             newCalculateWindow();
             Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             currentStage.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
 
             System.out.println("Error new window" + e.getMessage());
         }
     }
 
     @FXML
-    public void rarOut(ActionEvent actionEvent)
-    {
+    public void rarOut(ActionEvent actionEvent) {
         file.typeOfOutputArchive = "rar";
         try {
             newCalculateWindow();
             Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             currentStage.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
 
             System.out.println("Error new window" + e.getMessage());
         }
@@ -177,11 +166,11 @@ public class DataController {
         alert.setContentText("Please, fill all required fields");
         alert.showAndWait();
     }
+
     private void submitForm() {
-        if (nameInput.getText().isEmpty() || nameOutput.getText().isEmpty() ||extensionInputToggleGroup.getSelectedToggle() == null
-        ||extensionOutputToggleGroup.getSelectedToggle() == null || typeInputToggleGroup.getSelectedToggle() == null
-        ||typeOutputToggleGroup.getSelectedToggle() == null )
-        {
+        if (nameInput.getText().isEmpty() || extensionInputToggleGroup.getSelectedToggle() == null
+                || extensionOutputToggleGroup.getSelectedToggle() == null || typeInputToggleGroup.getSelectedToggle() == null
+                || typeOutputToggleGroup.getSelectedToggle() == null) {
             showErrorAlert();
         }
     }
@@ -203,7 +192,7 @@ public class DataController {
 
         selectedInputType = (RadioButton) typeInputToggleGroup.getSelectedToggle();
         switch (selectedInputType.getText()) {
-            case "Just file"-> {
+            case "Just file" -> {
                 file.isArchiveInputFile = false;
                 file.isEncryptInputFile = false;
             }
@@ -216,15 +205,15 @@ public class DataController {
                 file.isArchiveInputFile = true;
                 file.isEncryptInputFile = false;
             }
-            case "Encrypt -> Archive file"-> {
+            case "Encrypt -> Archive file" -> {
                 file.isArchiveInputFile = true;
                 file.isEncryptInputFile = true;
-                file.encryptThanArchiveInput =true;
+                file.encryptThanArchiveInput = true;
             }
-            case "Archive -> Encrypt file" ->{
+            case "Archive -> Encrypt file" -> {
                 file.isArchiveInputFile = true;
                 file.isEncryptInputFile = true;
-                file.ArchiveThanEncryptInput =true;
+                file.ArchiveThanEncryptInput = true;
             }
             default -> {
             }
@@ -245,17 +234,17 @@ public class DataController {
                 file.isArchiveOutputFile = true;
                 file.isEncryptOutputFile = false;
             }
-            case "Encrypt -> Archive file"-> {
+            case "Encrypt -> Archive file" -> {
                 file.isArchiveOutputFile = true;
-                file.isEncryptOutputFile= true;
-                file.encryptThanArchiveOutput= true;
+                file.isEncryptOutputFile = true;
+                file.encryptThanArchiveOutput = true;
 
 
             }
-            case "Archive -> Encrypt file"->{
+            case "Archive -> Encrypt file" -> {
                 file.isArchiveOutputFile = true;
-                file.isEncryptOutputFile= true;
-                file.ArchiveThanEncryptOutput =true;
+                file.isEncryptOutputFile = true;
+                file.ArchiveThanEncryptOutput = true;
 
             }
             default -> {
@@ -264,14 +253,11 @@ public class DataController {
         Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         currentStage.close();
 
-        if(file.isArchiveInputFile) {
+        if (file.isArchiveInputFile) {
             newArchiveInpWindow();
-        }
-        else if(file.isArchiveOutputFile)
-        {
+        } else if (file.isArchiveOutputFile) {
             newArchiveOutWindow();
-        }
-        else{
+        } else {
             newCalculateWindow();
         }
 
@@ -281,36 +267,40 @@ public class DataController {
 
 
     @FXML
-    public void calculate(ActionEvent actionEvent) throws IOException
-    {
-        Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        currentStage.close();
-        newProgressWindow();
+    public void calculate(ActionEvent actionEvent) throws IOException {
+
+            if (calculateToggleGroup.getSelectedToggle() == null) {
+                showErrorAlert();
+            } else {
+
+                Stage currentStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                currentStage.close();
+                Manager manage = new Manager(file);
+                manage.callFunctionInput();
+
+                RadioButton selectedInputType = (RadioButton) calculateToggleGroup.getSelectedToggle();
+                switch (selectedInputType.getText()) {
+                    case "Recursion" -> file.typeOfCalculate = "1";
+
+                    case "Regex" -> file.typeOfCalculate = "2";
+
+                    case "Library" -> file.typeOfCalculate = "3";
+
+                    default -> {
+
+                    }
+                }
 
 
+                manage.callFunctionOutput();
 
-        RadioButton selectedInputType = (RadioButton) calculateToggleGroup.getSelectedToggle();
-        switch (selectedInputType.getText()) {
-            case "Recursion" ->
-                file.typeOfCalculate = "1";
-
-            case "Regex" ->
-                file.typeOfCalculate = "2";
-
-            case "Library" ->
-                file.typeOfCalculate = "3";
-
-            default -> {
-
+                newProgressWindow();
             }
-        }
-
-        Manager manage = new Manager(file);
-        manage.callFunctionInput();
-        manage.callFunctionOutput();
-
 
 
     }
 
 }
+
+
+

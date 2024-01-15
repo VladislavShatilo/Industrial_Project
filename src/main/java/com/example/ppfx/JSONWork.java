@@ -37,7 +37,7 @@ public  class JSONWork {
             } catch (Exception e) {
                 System.err.println("Error read from json" + e.getMessage());
                 showErrorAlert( e.getMessage());
-                System.exit(1);
+               // System.exit(1);
             }
             return data;
 
