@@ -11,9 +11,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloController {
+public class DataController {
 
     private static final FileInformationStructure file = new FileInformationStructure();
+
+    @FXML
+    private ToggleGroup extensionInputToggleGroup;
+
+    @FXML
+    private TextField nameInput;
+
+    @FXML
+    private TextField nameOutput;
+    @FXML
+    private ToggleGroup extensionOutputToggleGroup;
+
+    @FXML
+    private ToggleGroup typeInputToggleGroup;
+
+    @FXML
+    private ToggleGroup typeOutputToggleGroup;
+
+    @FXML
+    private ToggleGroup calculateToggleGroup;
 
     @FXML
     private void newArchiveInpWindow() throws IOException {
@@ -149,22 +169,7 @@ public class HelloController {
 
     }
 
-    @FXML
-    private ToggleGroup extensionInputToggleGroup;
 
-    @FXML
-    private TextField nameInput;
-
-    @FXML
-    private TextField nameOutput;
-    @FXML
-    private ToggleGroup extensionOutputToggleGroup;
-
-    @FXML
-    private ToggleGroup typeInputToggleGroup;
-
-    @FXML
-    private ToggleGroup typeOutputToggleGroup;
     private void showErrorAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -273,8 +278,7 @@ public class HelloController {
 
     }
 
-    @FXML
-    private ToggleGroup calculateToggleGroup;
+
 
     @FXML
     public void calculate(ActionEvent actionEvent) throws IOException

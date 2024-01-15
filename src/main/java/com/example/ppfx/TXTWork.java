@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
-public class PlainTextProcess {
+public class TXTWork {
 
     private final Vector<String> data  = new Vector<>();
     private void showErrorAlert(String contentText) {

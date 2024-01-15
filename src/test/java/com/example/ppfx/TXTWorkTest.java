@@ -13,7 +13,7 @@ import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlainTextProcessTest {
+class TXTWorkTest {
     private boolean areFilesEqual(Path file1, Path file2) throws IOException {
 
         byte[] file1Content = Files.readAllBytes(file1);
@@ -21,11 +21,11 @@ class PlainTextProcessTest {
 
         return MessageDigest.isEqual(file1Content, file2Content);
     }
-    PlainTextProcess plainTextProcess = new PlainTextProcess();
+    TXTWork TXTWork = new TXTWork();
     @Test
     void test1() {
         Vector<String> expressions;
-        expressions = plainTextProcess.readFromPlainTextFile("i.txt");
+        expressions = TXTWork.readFromPlainTextFile("i.txt");
         Vector<String> expected = new Vector<>();
         expected.add("4 + 3 * 4;");
         expected.add("3 + 2 - 7;");
@@ -43,7 +43,7 @@ class PlainTextProcessTest {
         LibraryCalculatorBuilder libraryCalculatorBuilder = LibraryCalculatorBuilder.getInstance();
 
 
-        plainTextProcess.writeInPlainText(libraryCalculatorBuilder.calculate(data).build(),"temp.txt");
+        TXTWork.writeInPlainText(libraryCalculatorBuilder.calculate(data).build(),"temp.txt");
 
         writeInTxtTest();
         Path file1 = Path.of("temp.txt");

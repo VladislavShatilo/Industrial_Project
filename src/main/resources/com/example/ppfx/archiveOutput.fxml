@@ -7,7 +7,7 @@
 <?import java.net.URL?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="169.0"
       prefWidth="247.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ppfx.HelloController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ppfx.DataController">
    <stylesheets>
       <URL value="@styles.css"/>
    </stylesheets>

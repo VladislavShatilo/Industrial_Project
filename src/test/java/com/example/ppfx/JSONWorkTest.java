@@ -38,7 +38,7 @@ class JSONWorkTest {
     }
 
     @Test
-    void writeInJSON() {
+    void test2() {
         Vector<String> data = new Vector<>();
         data.add("4 + 3 * 4");
         data.add("3 + 2 - 7");

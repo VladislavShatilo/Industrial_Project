@@ -1,13 +1,13 @@
 /* styles.css */
 
-/* Установка цвета фона для Pane */
+
 .root {
-    -fx-background-color: #102321; /* Light blue background color */
+    -fx-background-color: #102321;
 }
 
-/* Установка цвета текста для Label */
+
 .label {
-    -fx-text-fill: #b1b4b4; /* Dark green text color */
+    -fx-text-fill: #b1b4b4;
 }
 
 .radio-button{

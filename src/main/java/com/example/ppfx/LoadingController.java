@@ -47,10 +47,8 @@ public class LoadingController {
 
         });
 
-
         timeline.play();
     }
-
 
 
 }

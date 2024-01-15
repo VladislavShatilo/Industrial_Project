@@ -26,7 +26,7 @@ public class Manager {
                 case "txt"->{
 
                     File outputFile = new File("enc_out.txt");
-                    PlainTextProcess txtWork = new PlainTextProcess();
+                    TXTWork txtWork = new TXTWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
                         result = txtWork.readFromPlainTextFile("enc_out.txt");
@@ -78,7 +78,7 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt"->{
-                    PlainTextProcess txtWork = new PlainTextProcess();
+                    TXTWork txtWork = new TXTWork();
                     try {
                         result = txtWork.readFromPlainTextFile( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
                         File fileToDelete = new File( archiveWork.read(file.nameInputFile+"."+file.typeOfInputArchive));
@@ -127,10 +127,10 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt"->{
-                    PlainTextProcess plainTextProcess = new PlainTextProcess();
+                    TXTWork TXTWork = new TXTWork();
                     try {
                         encryption.decryptFile(inputFile,outputFile);
-                        result = plainTextProcess.readFromPlainTextFile(archiveWork.read("enc_out." + file.typeOfInputArchive));
+                        result = TXTWork.readFromPlainTextFile(archiveWork.read("enc_out." + file.typeOfInputArchive));
                         File fileToDelete = new File( archiveWork.read("enc_out." + file.typeOfInputArchive));
                         fileToDelete.delete();
                     }
@@ -183,7 +183,7 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt"->{
-                    PlainTextProcess txtWork = new PlainTextProcess();
+                    TXTWork txtWork = new TXTWork();
                     try {
 
                         File outputFile = new File("enc_out.txt");
@@ -231,7 +231,7 @@ public class Manager {
             switch (file.typeInputFile)
             {
                 case "txt" -> {
-                    PlainTextProcess txtWork = new PlainTextProcess();
+                    TXTWork txtWork = new TXTWork();
                     try {
                         result = txtWork.readFromPlainTextFile(file.nameInputFile);
 
@@ -288,8 +288,8 @@ public class Manager {
     }
 
     private void archiveTxt(){
-        PlainTextProcess plainTextProcess = new PlainTextProcess();
-        plainTextProcess.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
+        TXTWork TXTWork = new TXTWork();
+        TXTWork.writeInPlainText(result, file.nameOutputFile + "." + file.typeOutputFile);
         ArchiveWork archiveWork = new ArchiveWork();
         archiveWork.write(file.nameOutputFile,file.typeOutputFile, file.typeOfOutputArchive);
         File fileToDelete = new File(file.nameOutputFile + "." + file.typeOutputFile);
@@ -356,8 +356,8 @@ public class Manager {
 
             switch (file.typeOutputFile) {
                 case "txt" -> {
-                    PlainTextProcess plainTextProcess = new PlainTextProcess();
-                    plainTextProcess.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
+                    TXTWork TXTWork = new TXTWork();
+                    TXTWork.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
                     enc();
                 }
                 case "json" -> {
@@ -407,8 +407,8 @@ public class Manager {
         {
             switch (file.typeOutputFile) {
                 case "txt" -> {
-                    PlainTextProcess plainTextProcess = new PlainTextProcess();
-                    plainTextProcess.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
+                    TXTWork TXTWork = new TXTWork();
+                    TXTWork.writeInPlainText(result,file.nameOutputFile + file.typeOutputFile);
                     archEnc();
 
                 }
@@ -431,7 +431,7 @@ public class Manager {
             file.nameOutputFile += "." + file.typeOutputFile;
             switch (file.typeOutputFile) {
                 case "txt" -> {
-                    PlainTextProcess txtWork = new PlainTextProcess();
+                    TXTWork txtWork = new TXTWork();
                     txtWork.writeInPlainText(result, file.nameOutputFile);
                 }
                 case "json" -> {
